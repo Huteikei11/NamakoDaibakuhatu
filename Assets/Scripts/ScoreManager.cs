@@ -82,11 +82,11 @@ public class ScoreManager : MonoBehaviour
     {
         if (y > area[0])//ˆê”Ôã
         {
-            return 0;
+            return 4;
         }
         else if (y > area[1])
         {
-            return 1;
+            return 3;
         }
         else if (y > area[2])
         {
@@ -94,11 +94,11 @@ public class ScoreManager : MonoBehaviour
         }
         else if (y > area[3])
         {
-            return 3;
+            return 1;
         }
         else if (y > area[4])
         {
-            return 4;
+            return 0;
         }
         return 0;
     }
