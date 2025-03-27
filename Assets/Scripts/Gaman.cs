@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gaman : MonoBehaviour
 {
     [SerializeField]　private ObjectController2D suii;
+    [SerializeField] private OppaiManager oppaiManager;
     public float stamina;            // 現在のスタミナ
     public float maxStamina;         // スタミナの最大値
     public float staminaSpeed;       // スタミナ消費速度
@@ -17,6 +18,7 @@ public class Gaman : MonoBehaviour
     private float lastGamanTime;     // 前回gmanaddを実行した時間
     private float lastRecoveryTime;  // 最後にスタミナを回復した時間
     private bool lastGaman; //前回の回復からガマンを使ったか
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,8 @@ public class Gaman : MonoBehaviour
                 gmanadd();
                 lastGamanTime = Time.time; // 実行時間を更新
                 lastGaman = false;
+                oppaiManager.CheckGamanKey();
+
             }
         }
 
@@ -62,8 +66,19 @@ public class Gaman : MonoBehaviour
     // gamanaddメソッドの定義
     void gmanadd()
     {
-        // gamanPowerを用いた処理をここに記述
-        Debug.Log("ガマン！: " + gamanPower);
-        suii.AddPositionY(gamanPower);
+        //射精しそうなとき
+        if (oppaiManager.isChecking)
+        {
+            // gamanPowerを用いた処理をここに記述
+            Debug.Log("射精直前！: " + gamanPower);
+            suii.AddPositionY(gamanPower/4);
+        }
+        //普通
+        else
+        {
+            // gamanPowerを用いた処理をここに記述
+            Debug.Log("ガマン！: " + gamanPower);
+            suii.AddPositionY(gamanPower);
+        }
     }
 }
