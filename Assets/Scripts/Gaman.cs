@@ -31,6 +31,8 @@ public class Gaman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.Instance.IsGameStarted || GameManager.Instance.IsPaused) return; // ポーズ中は動かない
+
         //射精を我慢するときに必要なstaminaの計算
         if (oppaiManager.dangerCount <= 1)
         {

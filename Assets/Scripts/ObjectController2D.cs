@@ -30,6 +30,7 @@ public class ObjectController2D : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.IsGameStarted || GameManager.Instance.IsPaused) return; // ポーズ中は動かない
         // Inspectorで値を変更した際にリアルタイムで反映
         ApplyRigidbodySettings();
 

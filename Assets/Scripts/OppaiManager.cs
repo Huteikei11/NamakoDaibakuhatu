@@ -40,6 +40,7 @@ public class OppaiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.Instance.IsGameStarted || GameManager.Instance.IsPaused) return; // ポーズ中は動かない
         // Wキーが押されたときの処理
         if (Input.GetKeyDown(KeyCode.W))
         { 
