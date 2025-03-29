@@ -20,19 +20,21 @@ public class OppaiManager : MonoBehaviour
     public float[] paiModevalues = new float[3];//モーションごとのパイズリパワー
 
     //射精しそう
-    public TextMeshProUGUI gamanNormaText;
     private int callCount = 0;
     public bool isChecking = false;
-    private int dangerCount = 0;
+    public int dangerCount = 0;
     private int gamanNorma;
     private Coroutine checkingCoroutine;
+    [SerializeField] private GameObject dangerAnime;
+    private float lastCheckTime = 0f;
+    private float checkCooldown = 1f; //射精しそうな時のクールタイム(重ならないように)
 
     // Start is called before the first frame update
     void Start()
     {
         suiiscript = suii.GetComponent<ObjectController2D>();
         ScheduleNextNoise(); // 初回のノイズスケジュールを設定
-        gamanNormaText.gameObject.SetActive(false);
+        dangerAnime.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,11 +51,12 @@ public class OppaiManager : MonoBehaviour
         suiiscript.gravityScale = gPaizuriPower;
 
         //射精（ミス）の検知
-        if (suii.transform.position.y >= suiiscript.maxY)
+        if (suii.transform.position.y > suiiscript.maxY)
         {
-            Debug.Log("射精しそう!!");
-            if (!isChecking)
+            if (!isChecking && Time.time - lastCheckTime > checkCooldown)
             {
+                Debug.Log("射精しそう!!");
+                lastCheckTime = Time.time;
                 checkingCoroutine = StartCoroutine(CheckFunctionBCalls());
             }
         }
@@ -108,59 +111,37 @@ public class OppaiManager : MonoBehaviour
     }
 
 
-    public void CheckGamanKey()
+    public void CheckGamanKey() //射精を耐える時に呼ばれる
     {
         if (isChecking)
         {
             callCount++;
-            UpdateText();
 
-            if (callCount >= gamanNorma)
-            {
-                Debug.Log("耐えた");
-                StopCoroutine(checkingCoroutine);
-                EndChecking();
-            }
+            Debug.Log("耐えた");
+            StopCoroutine(checkingCoroutine);
+            checkingCoroutine = null;
+            EndChecking();
         }
     }
 
     private IEnumerator CheckFunctionBCalls()
     {
-        isChecking = true;
+        if (isChecking) yield break; // すでに起動中なら二重起動を防ぐ
         callCount = 0;
         dangerCount += 1;
+        isChecking = true;
+        Debug.Log(dangerCount);
+        //Danger表示
+        dangerAnime.SetActive(true);
 
-        if (dangerCount == 1)
-        {
-            gamanNorma = 4;
-        }
-        else if (dangerCount == 2)
-        {
-            gamanNorma = 6;
-        }
-        else if (dangerCount == 3)
-        {
-            gamanNorma = 7;
-        }
-        else if (dangerCount >= 4)
-        {
-            gamanNorma = 6 + dangerCount;
-        }
-
-        gamanNormaText.gameObject.SetActive(true);
-        UpdateText();
-
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
         EndChecking();
     }
 
     private void EndChecking()
     {
-        isChecking = false;
-        gamanNormaText.gameObject.SetActive(false);
-
-        if (callCount < gamanNorma)
+        if (callCount == 0)
         {
             Debug.Log("どぴゅっ！");
             //射精の演出
@@ -168,15 +149,9 @@ public class OppaiManager : MonoBehaviour
             //リザルト画面
             SceneManager.LoadScene("Result");
         }
-    }
-
-    private void UpdateText()
-    {
-        if (gamanNormaText != null)
-        {
-            int remaining = gamanNorma - callCount;
-            gamanNormaText.text = remaining.ToString();
-        }
+        isChecking = false;
+        //Danger非表示
+        dangerAnime.SetActive(false);
     }
 
 }
