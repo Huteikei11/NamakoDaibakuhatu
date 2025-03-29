@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TinpoManager : MonoBehaviour
 {
-    [SerializeField] private GameProgressManager gameProgressManager;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        CheckStageToRender(gameProgressManager.stage);
+        CheckStageToRender(gameManager.stage);
     }
 
     // Update is called once per frame

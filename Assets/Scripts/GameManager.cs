@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     private List<Rigidbody2D> allRigidbodies;
     private List<Animator> allAnimators;
 
+    public int stage;
+    [SerializeField] private CountdownTimer countdownTimer;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -28,6 +31,9 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 0f; // 最初はゲーム停止
         pauseMenu.SetActive(false); // ゲーム開始前はポーズパネルを非表示
+
+        // タイマーが 0 になったらゲームオーバー処理を実行
+        countdownTimer.OnTimerEnd += GameOver;
     }
 
     private void Update()
@@ -48,6 +54,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f); // フェード後に待機
 
         IsGameStarted = true;
+        countdownTimer.StartTimer(60f); // 60秒のカウントダウン開始
+
         TogglePause(); // ゲーム開始（ポーズ解除）
     }
 
@@ -76,6 +84,23 @@ public class GameManager : MonoBehaviour
                 animator.enabled = !IsPaused;
             }
         }
+        if (IsPaused)
+        {
+            countdownTimer.StopTimer();
+        }
+        else
+        {
+            countdownTimer.ResumeTimer();
+        }
+    }
+
+    void GameOver()//カウントダウンタイマーが0になったときにイベントから呼ばれる
+    {
+        Debug.Log("ゲームオーバー！");
+        IsGameStarted = false;
+        IsPaused = true;
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true); // ゲームオーバー画面として利用
     }
 
     IEnumerator FadeIn()//多分使わない
