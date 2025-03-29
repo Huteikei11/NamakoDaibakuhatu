@@ -25,6 +25,8 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI goukeitext;
     public TypewriterByWord typewriterAddscore;
     private float addscore;
+    private bool isLoop = true;
+    
     
 
 
@@ -42,17 +44,19 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        //ボーナスの計算
-        wRatio = wRatioCalulate(oppai.wValue); //1.02 -> 2 のように大きさを変える
-        gamanArea = GamanAreaCalcurate(suii.transform.position.y, gamanAreas);//ガマンのどのエリアなのか計算
-        gamanRatio = GamanRatio(gamanArea, gamanratioList);
-        //ボーナスの表示
-        gamanBonustext.text = "×"+gamanRatio.ToString();
-        wBonustext.text = "×"+wRatio.ToString();
-        goukeitext.text = "×"+(gamanRatio+wRatio).ToString();
-    }
+        if (isLoop)
+        {
+            //ボーナスの計算
+            wRatio = wRatioCalulate(oppai.wValue); //1.02 -> 2 のように大きさを変える
+            gamanArea = GamanAreaCalcurate(suii.transform.position.y, gamanAreas);//ガマンのどのエリアなのか計算
+            gamanRatio = GamanRatio(gamanArea, gamanratioList);
+            //ボーナスの表示
+            gamanBonustext.text = "×" + gamanRatio.ToString();
+            wBonustext.text = "×" + wRatio.ToString();
+            goukeitext.text = "×" + (gamanRatio + wRatio).ToString();
+        }
 
-    // Update is called once per frame
+    }
 
     void ScoreDisplay()//ループ処理。任意の間隔にしたいのでこの形に
     {
@@ -67,10 +71,17 @@ public class ScoreManager : MonoBehaviour
         //ランクの表示処理
     }
 
-    void StopLoop()//ループを止める
+    public void StopLoop()//ループを止める
     {
         // "LoopAction"のInvokeRepeatingを停止
         CancelInvoke("ScoreDisplay");
+        isLoop = false;
+    }
+
+    public void ReStartLoop()
+    {
+        InvokeRepeating("ScoreDisplay", 0.0f, roopInterval);
+        isLoop = true;
     }
 
     private float ScoreAdd(float wration,float gaman)

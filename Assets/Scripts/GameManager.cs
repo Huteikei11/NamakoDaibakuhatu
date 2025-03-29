@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -59,10 +60,13 @@ public class GameManager : MonoBehaviour
         TogglePause(); // ゲーム開始（ポーズ解除）
     }
 
-    public void TogglePause()
+    public void TogglePause(bool panel = true)
     {
         IsPaused = !IsPaused;
-        pauseMenu.SetActive(IsPaused); // ポーズメニューの表示切替
+        if (panel)
+        {
+            pauseMenu.SetActive(IsPaused); // ポーズメニューの表示切替
+        }
 
         Time.timeScale = IsPaused ? 0f : 1f; // ポーズ時にゲーム停止
 

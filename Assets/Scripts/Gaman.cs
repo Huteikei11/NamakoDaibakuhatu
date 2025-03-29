@@ -20,6 +20,8 @@ public class Gaman : MonoBehaviour
     private bool lastGaman; //前回の回復からガマンを使ったか
     public float staminaNorma = 0;//射精を我慢するときのノルマ
 
+    public bool isOperable = true;//操作可能か
+
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +54,7 @@ public class Gaman : MonoBehaviour
         }
 
         // Sキーが押されたときの処理
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S)&&isOperable)
         {
             //射精しそうなとき
             if (oppaiManager.isChecking)

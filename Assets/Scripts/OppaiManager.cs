@@ -146,13 +146,17 @@ public class OppaiManager : MonoBehaviour
         {
             Debug.Log("どぴゅっ！");
             //射精の演出
-
+            StartCoroutine(FinishEvent());
             //リザルト画面
-            SceneManager.LoadScene("Result");
+            //SceneManager.LoadScene("Result");
         }
         isChecking = false;
         //Danger非表示
         dangerAnime.SetActive(false);
     }
 
+    private IEnumerator FinishEvent()
+    {
+        yield return StartCoroutine(DialogueController.Instance.FinishDialog());
+    }
 }
