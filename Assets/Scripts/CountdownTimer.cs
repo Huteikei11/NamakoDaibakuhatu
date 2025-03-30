@@ -11,7 +11,6 @@ public class CountdownTimer : MonoBehaviour
     private Coroutine timerCoroutine;
 
     public TMP_Text timerText; // **TextMeshProの参照**
-    public event Action OnTimerEnd; // タイマー終了時のイベント
 
     void Start()
     {
