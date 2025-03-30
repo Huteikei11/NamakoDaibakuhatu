@@ -21,6 +21,7 @@ public class Gaman : MonoBehaviour
     public float staminaNorma = 0;//射精を我慢するときのノルマ
 
     public bool isOperable = true;//操作可能か
+    public bool isGroggy;
 
 
     // Start is called before the first frame update
@@ -73,7 +74,7 @@ public class Gaman : MonoBehaviour
             //通常
             else
             {
-                if (stamina > staminaSpeed && Time.time >= lastGamanTime + gamanCoolTime) // 条件変更: staminaSpeed より大きい場合
+                if (stamina > staminaSpeed && Time.time >= lastGamanTime + gamanCoolTime&& !isGroggy) // 条件変更: staminaSpeed より大きい場合
                 {
                 stamina -= staminaSpeed;
                 stamina = Mathf.Max(0, stamina); // staminaが負の値にならないようにする
@@ -81,6 +82,11 @@ public class Gaman : MonoBehaviour
                 lastGamanTime = Time.time; // 実行時間を更新
                 lastGaman = false;
 
+                }
+                else if(stamina <= staminaSpeed)//スタミナ不足でグロッギー状態になる
+                {
+                    stamina = 0;
+                    isGroggy = true;
                 }
             }
 
@@ -101,6 +107,11 @@ public class Gaman : MonoBehaviour
             stamina = Mathf.Min(maxStamina, stamina); // staminaがmaxStaminaを超えないようにする
             lastRecoveryTime = Time.time; // 回復時間を更新
             lastGaman = true;
+
+            if(stamina == maxStamina)//グロッギー状態を解除
+            {
+                isGroggy = false;
+            }
         }
 
     }
