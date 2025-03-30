@@ -69,6 +69,10 @@ public class CountdownTimer : MonoBehaviour
     private void TimerEnded()
     {
         Debug.Log("タイマー終了！");
+        if (DifficultyManager.Instance != null)//クリアのフラグ
+        {
+            DifficultyManager.Instance.SetGameCleared(true);
+        }
         StartCoroutine(FinishEvent());
         UpdateTimerText(); // **タイマー終了時の表示更新**
     }
