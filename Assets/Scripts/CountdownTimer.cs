@@ -70,8 +70,13 @@ public class CountdownTimer : MonoBehaviour
     private void TimerEnded()
     {
         Debug.Log("タイマー終了！");
-        OnTimerEnd?.Invoke(); // **イベント発火**
+        StartCoroutine(FinishEvent());
         UpdateTimerText(); // **タイマー終了時の表示更新**
+    }
+
+    private IEnumerator FinishEvent()//呼び出す関数をとりあえず失敗時と同じにしている
+    {
+        yield return StartCoroutine(DialogueController.Instance.FinishDialog());
     }
 
     public float GetRemainingTime()

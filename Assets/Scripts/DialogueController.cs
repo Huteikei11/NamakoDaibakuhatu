@@ -51,6 +51,7 @@ public class DialogueController : MonoBehaviour
     }
 
     public IEnumerator FinishDialog()//射精が終わったときの演出
+        //とりあえず失敗時と成功時にどっちもこれがよびだされるようにしてある
     {
         
         //タイマーとスコア計算を止める
