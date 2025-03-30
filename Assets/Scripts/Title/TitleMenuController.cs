@@ -88,8 +88,9 @@ public class TitleMenuController : MonoBehaviour
                 //ゲーム開始難易度選択
                 difficulty = selectedIndex; //難易度。読み込むときはTitleMenuController.difficulty
                 //A=0,B=1,C=2
-                Debug.Log("試験 " + ('A' + difficulty.ToString()) + " 開始");
-                SceneManager.LoadScene("Main");
+                Debug.Log("試験 " + ( difficulty.ToString()) + " 開始");
+                DifficultyManager.Instance.StartGame("Main", difficulty);
+
 
             }
         }

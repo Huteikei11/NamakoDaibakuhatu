@@ -15,11 +15,12 @@ public class GameManager : MonoBehaviour
     private List<Rigidbody2D> allRigidbodies;
     private List<Animator> allAnimators;
 
-    public int stage;
+    public int difficulty;
     [SerializeField] private CountdownTimer countdownTimer;
 
     private void Awake()
     {
+        difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
             countdownTimer.ResumeTimer();
         }
     }
+
 
     IEnumerator FadeIn()//‘½•ªŽg‚í‚È‚¢
     {

@@ -9,7 +9,7 @@ public class TinpoManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CheckStageToRender(gameManager.stage);
+        CheckStageToRender(gameManager.difficulty);
     }
 
     // Update is called once per frame
@@ -17,9 +17,9 @@ public class TinpoManager : MonoBehaviour
     {
         
     }
-    private void CheckStageToRender(int stage)
+    private void CheckStageToRender(int difficulty)
     {
-        if(stage >= 3)
+        if(difficulty >= 3)
         {
             //特定ステージ以上なら消す
             spriteRenderer.enabled = false;
