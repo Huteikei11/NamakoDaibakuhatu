@@ -55,7 +55,7 @@ public class Gaman : MonoBehaviour
         }
 
         // SƒL[‚ª‰Ÿ‚³‚ê‚½‚Æ‚«‚Ìˆ—
-        if (Input.GetKeyDown(KeyCode.S)&&isOperable)
+        if ((Input.GetKeyDown(KeyCode.S)|| Input.GetKeyDown(KeyCode.DownArrow)) &&isOperable)
         {
             //Ë¸‚µ‚»‚¤‚È‚Æ‚«
             if (oppaiManager.isChecking)
