@@ -47,7 +47,7 @@ public class ScoreManager : MonoBehaviour
         if (isLoop)
         {
             //ボーナスの計算
-            wRatio = wRatioCalulate(oppai.wValue); //1.02 -> 2 のように大きさを変える
+            wRatio = wRatioCalulate(oppai.gPaizuriPower,oppai.adjustPaizuriPower); //1.02 -> 2 のように大きさを変える
             gamanArea = GamanAreaCalcurate(suii.transform.position.y, gamanAreas);//ガマンのどのエリアなのか計算
             gamanRatio = GamanRatio(gamanArea, gamanratioList);
             //ボーナスの表示
@@ -137,8 +137,8 @@ public class ScoreManager : MonoBehaviour
         }
         return 0;
     }
-    private int wRatioCalulate(float w)
+    private int wRatioCalulate(float w ,float origin)//通常時と今のパイズリパワーの比をいい感じに
     {
-        return (int)((w-1f) * 100+0.1f);
+        return (int)(((w*10/origin) * -1) -9);
     }
 }

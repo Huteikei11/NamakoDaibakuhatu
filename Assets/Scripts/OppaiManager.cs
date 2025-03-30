@@ -15,9 +15,13 @@ public class OppaiManager : MonoBehaviour
     public float adjustPaizuriPower;//パイズリパワー調節用の値
     public float gPaizuriPower;//パイズリパワー計算結果
     public float wValue;//Wキーの入力結果
-    public float wValueIncrease; //Wキーの増加度
+    public float wValuePaizuriPowerAdjust;//wValueのパイズリパワーへの倍率
+    public float wValueIncreaseRate = 0.07f; // Wキー押下時の増加率（秒間7%）
+    public float wValueDecreaseRate = 0.04f; // Wキー離したときの減少率（秒間4%）
     public int paiMode;//パイズリのモーション
     public float[] paiModevalues = new float[3];//モーションごとのパイズリパワー
+
+    private bool isWKeyPressed = false;
 
     //射精しそう
     private int callCount = 0;
@@ -43,9 +47,26 @@ public class OppaiManager : MonoBehaviour
         if (!GameManager.Instance.IsGameStarted || GameManager.Instance.IsPaused) return; // ポーズ中は動かない
         // Wキーが押されたときの処理
         if (Input.GetKeyDown(KeyCode.W))
-        { 
-           wValue = W_Calculate(wValue, wValueIncrease);
+        {
+            isWKeyPressed = true;
         }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            isWKeyPressed = false;
+        }
+
+        // Wキーの入力による増減処理
+        if (isWKeyPressed)
+        {
+            wValue += wValueIncreaseRate * Time.deltaTime;
+        }
+        else
+        {
+            wValue -= wValueDecreaseRate * Time.deltaTime;
+        }
+
+        wValue = Mathf.Max(0, wValue); // wValue を 0 以上に制限
+        wValue = Mathf.Min(100, wValue); // wValue を 1000 以下に制限
 
         //パイズリパワーを射精水位に適用
         gPaizuriPower = -1 * G_PaizuriPowerCalulate(paiModevalues[paiMode], wValue, adjustPaizuriPower);
@@ -71,7 +92,7 @@ public class OppaiManager : MonoBehaviour
 
     private float G_PaizuriPowerCalulate(float paivalue, float wValue,float adjust)
     {
-        return paivalue*wValue*adjust;
+        return paivalue*(1+wValue*wValuePaizuriPowerAdjust)*adjust;
     }
 
     //ノイズを加える時間
