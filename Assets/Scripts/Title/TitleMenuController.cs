@@ -18,11 +18,12 @@ public class TitleMenuController : MonoBehaviour
     private Stack<GameObject[]> menuHistory = new Stack<GameObject[]>();
 
     public static int difficulty;
+    public float yAdjust;
 
     void Start()
     {
         currentMenu = mainMenuItems;
-        ShowMenu(mainMenuContainer);
+        //ShowMenu(mainMenuContainer);
         UpdateCursor();
     }
 
@@ -55,7 +56,7 @@ public class TitleMenuController : MonoBehaviour
     void UpdateCursor()
     {
         Vector3 newPosition = cursor.transform.position;
-        newPosition.y = currentMenu[selectedIndex].transform.position.y;
+        newPosition.y = currentMenu[selectedIndex].transform.position.y+yAdjust;
         cursor.transform.position = newPosition;
     }
 
@@ -65,22 +66,32 @@ public class TitleMenuController : MonoBehaviour
         {
             if (selectedIndex == 0) // ŽŽŒ±ŠJŽn
             {
+                ToOriginalmainMenuItemAt(0, 0.3f);
+                ToOriginalmainMenuItemAt(1, 0.4f);
                 OpenMenu(testMenuItems, testMenuContainer);
+                ToTargettestMenuItemAt(0, 0.3f);
+                ToTargettestMenuItemAt(1, 0.4f);
+                ToTargettestMenuItemAt(2, 0.5f);
+                ToTargettestMenuItemAt(3, 0.6f);
             }
             else if (selectedIndex == 1) // ’†’f
             {
+                ToOriginalmainMenuItemAt(0, 0.4f);
+                ToOriginalmainMenuItemAt(1, 0.3f);
                 OpenMenu(exitMenuItems, exitMenuContainer);
             }
         }
         else if (currentMenu == testMenuItems)
         {
-            if (selectedIndex == 3)//ŽŽŒ±‹L˜^
+            if (selectedIndex == 3)//‚à‚Ç‚é
             {
-
-            }
-            else if (selectedIndex == 4) // ‚â‚Á‚Ï’†Ž~
-            {
+                ToOriginaltestMenuItemAt(0, 0.6f);
+                ToOriginaltestMenuItemAt(1, 0.5f);
+                ToOriginaltestMenuItemAt(2, 0.4f);
+                ToOriginaltestMenuItemAt(3, 0.3f);
                 GoBack();
+                ToTargetmainMenuItemAt(0, 0.3f);
+                ToTargetmainMenuItemAt(1, 0.4f);
             }
 
             else
@@ -108,12 +119,48 @@ public class TitleMenuController : MonoBehaviour
         }
     }
 
+
+    public void ToOriginaltestMenuItemAt(int index, float delay = 0f)
+    {
+        if (index >= 0 && index < testMenuItems.Length)
+            testMenuItems[index]?.GetComponent<TitleButtonAnime>()?.MoveToOriginal(delay);
+    }
+
+    public void ToTargettestMenuItemAt(int index, float delay = 0f)
+    {
+        if (index >= 0 && index < testMenuItems.Length)
+            testMenuItems[index]?.GetComponent<TitleButtonAnime>()?.MoveToTarget(delay);
+    }
+
+    public void ToOriginalmainMenuItemAt(int index, float delay = 0f)
+    {
+        if (index >= 0 && index < mainMenuItems.Length)
+            mainMenuItems[index]?.GetComponent<TitleButtonAnime>()?.MoveToOriginal(delay);
+    }
+
+    public void ToTargetmainMenuItemAt(int index, float delay = 0f)
+    {
+        if (index >= 0 && index < mainMenuItems.Length)
+            mainMenuItems[index]?.GetComponent<TitleButtonAnime>()?.MoveToTarget(delay);
+    }
+
+    public void ToOriginalexitMenuItemAt(int index, float delay = 0f)
+    {
+        if (index >= 0 && index < exitMenuItems.Length)
+            exitMenuItems[index]?.GetComponent<TitleButtonAnime>()?.MoveToOriginal(delay);
+    }
+    public void ToTargetexitMenuItemAt(int index, float delay = 0f)
+    {
+        if (index >= 0 && index < exitMenuItems.Length)
+            exitMenuItems[index]?.GetComponent<TitleButtonAnime>()?.MoveToTarget(delay);
+    }
+
     void OpenMenu(GameObject[] newMenu, GameObject menuContainer)
     {
         menuHistory.Push(currentMenu);
         currentMenu = newMenu;
         selectedIndex = 0;
-        ShowMenu(menuContainer);
+        //ShowMenu(menuContainer);
         UpdateCursor();
     }
 
@@ -123,7 +170,7 @@ public class TitleMenuController : MonoBehaviour
         {
             currentMenu = menuHistory.Pop();
             selectedIndex = 0;
-            ShowMenu(GetContainerForMenu(currentMenu));
+            //ShowMenu(GetContainerForMenu(currentMenu));
             UpdateCursor();
         }
     }
