@@ -225,7 +225,7 @@ MonoBehaviour:
   moveDelay: 0.3
   moveDuration: 0.6
   moveEase: 7
-  shiftAmount: 0.5
+  shiftAmount: 3
   shiftDuration: 0.5
   darkenColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   colorChangeDuration: 0.5
@@ -442,10 +442,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalPosition: {x: -3.83, y: 3.99, z: 0}
   targetPosition: {x: -3.83, y: 0.98, z: 0}
-  moveDelay: 0.6
+  moveDelay: 0.3
   moveDuration: 0.4
   moveEase: 7
-  shiftAmount: 0.5
+  shiftAmount: 3
   shiftDuration: 0.5
   darkenColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   colorChangeDuration: 0.5
@@ -1899,7 +1899,7 @@ MonoBehaviour:
   moveDelay: 0
   moveDuration: 0.4
   moveEase: 7
-  shiftAmount: 0.5
+  shiftAmount: 2.8
   shiftDuration: 0.5
   darkenColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   colorChangeDuration: 0.5
@@ -2436,9 +2436,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1944619212}
   - {fileID: 2019121236}
   - {fileID: 1138356142}
-  - {fileID: 1944619212}
   - {fileID: 1000769156}
   - {fileID: 1657739105}
   - {fileID: 1067732084}
@@ -2469,15 +2469,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   runks:
+  - {fileID: 1944619211}
   - {fileID: 2019121235}
   - {fileID: 1138356141}
-  - {fileID: 1944619211}
   cursor: {fileID: 1000769154}
   mainMenuContainer: {fileID: 1657739104}
   testMenuContainer: {fileID: 1067732083}
   exitMenuContainer: {fileID: 1972170538}
   originalX: -4.378
   yAdjust: 0.125
+  titleLogo: {fileID: 526468334}
+  titleKeiki: {fileID: 1276667560}
+  titleKuroobi: {fileID: 281230567}
 --- !u!1 &1847272534
 GameObject:
   m_ObjectHideFlags: 0

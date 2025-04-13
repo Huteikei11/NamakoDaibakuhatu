@@ -26,6 +26,10 @@ public class TitleMenuController : MonoBehaviour
     public float yAdjust;
     private GameObject lastMovedItem = null; // 前回動かしたメニュー項目
 
+    public TitleLogo titleLogo;
+    public TitleKeiki titleKeiki;
+    public TitleKuroobi titleKuroobi;
+
     private bool isAllowMove;
     void Start()
     {
@@ -139,6 +143,9 @@ public class TitleMenuController : MonoBehaviour
             {
                 ToOriginalmainMenuItemAt(0, 0.3f);
                 ToOriginalmainMenuItemAt(1, 0.4f);
+                titleLogo.Shift();
+                titleKeiki.Shift();
+                titleKuroobi.Shift();
                 cursorDelay = 1.5f;
                 OpenMenu(testMenuItems, testMenuContainer);
                 ToTargettestMenuItemAt(0, 0.3f,0.5f);
@@ -168,6 +175,9 @@ public class TitleMenuController : MonoBehaviour
                 ToOriginalRunkAt(0, 0.6f);
                 ToOriginalRunkAt(1, 0.5f);
                 ToOriginalRunkAt(2, 0.4f);
+                titleLogo.ResetPosition();
+                titleKeiki.ResetPosition();
+                titleKuroobi.ResetPosition();
                 GoBack();
                 ToTargetmainMenuItemAt(0, 0.3f,0.5f);
                 ToTargetmainMenuItemAt(1, 0.4f);
@@ -183,6 +193,7 @@ public class TitleMenuController : MonoBehaviour
                 {
                     float delay = (i == difficulty) ? 0.1f : 0.3f;
                     ToOriginaltestMenuItemAt(i, delay);
+                    ToOriginalRunkAt(i,delay);
                 }
 
                 // AnimatorのTriggerでCloseアニメーションを再生

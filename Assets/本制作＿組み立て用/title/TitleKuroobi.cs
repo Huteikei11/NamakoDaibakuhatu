@@ -13,6 +13,7 @@ public class TitleKuroobi : MonoBehaviour
     [Header("âEÇ…Ç∏ÇÍÇÈìÆçÏê›íË")]
     public float shiftAmount = 0.5f;
     public float shiftDuration = 0.5f;
+    public float shiftDelay = 1;
     public Color darkenColor = Color.gray;
     public float colorChangeDuration = 0.5f;
 
@@ -42,6 +43,8 @@ public class TitleKuroobi : MonoBehaviour
 
     public void ResetPosition()
     {
-        transform.DOMove(originalPosition, shiftDuration).SetEase(Ease.OutCubic);
+        Vector3 shiftedPosition = transform.position - new Vector3(shiftAmount, 0f, 0f);
+        transform.DOMove(shiftedPosition, shiftDuration).SetEase(Ease.OutCubic)
+        .SetDelay(shiftDelay);
     }
 }
