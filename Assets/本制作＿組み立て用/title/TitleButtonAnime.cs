@@ -20,7 +20,8 @@ public class TitleButtonAnime : MonoBehaviour
     private Color originalColor;
 
     public bool isfitst;
-
+    public bool top;
+   
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -30,20 +31,27 @@ public class TitleButtonAnime : MonoBehaviour
         // 初期位置にセット
         transform.position = originalPosition;
         // 指定時間待ってから移動（delay = 1秒）
+        float adjust = 0f;
+        if (top)
+        {
+            adjust = 0.5f;
+        }
         if (isfitst)
         {
 
-            MoveToTarget(moveDelay);
+            MoveToTarget(moveDelay,adjust);
         }
-
+        adjust = 0f;
     }
 
     // 指定した座標（targetPosition）へ delay秒待ってから移動
-    public void MoveToTarget(float delay)
+    public void MoveToTarget(float delay, float adjust =0f)
     {
+        targetPosition.x += adjust;
         transform.DOMove(targetPosition, moveDuration)
             .SetEase(moveEase)
             .SetDelay(delay);
+        targetPosition.x -= adjust;
     }
 
     // 初期位置（originalPosition）へ delay秒待ってから戻る
