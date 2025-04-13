@@ -222,7 +222,22 @@ public class TitleMenuController : MonoBehaviour
 
     IEnumerator Quit()
     {
-        yield return new WaitForSeconds(1f);//1秒待つ
+        Animator cursorAnimator = cursor.GetComponent<Animator>();
+        if (cursorAnimator != null)
+        {
+            cursorAnimator.SetTrigger("End");
+        }
+
+        float offScreenX = originalX - 10f;
+        cursor.transform.DOMoveX(offScreenX, 0.2f).OnComplete(() =>
+        {
+            // 退場完了後、カーソル位置をY更新
+            Vector3 newPosition = cursor.transform.position;
+            newPosition.y = currentMenu[selectedIndex].transform.position.y + yAdjust;
+            cursor.transform.position = new Vector3(offScreenX, newPosition.y, newPosition.z);
+        });
+
+            yield return new WaitForSeconds(1f);//1秒待つ
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
 #else
