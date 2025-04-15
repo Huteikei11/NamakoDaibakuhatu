@@ -6,6 +6,7 @@ public class KeikiManager : MonoBehaviour
 {
     [SerializeField] private OppaiManager oppaiManager;
     public int paiMode;
+    public Animator oppaianime;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,13 +28,14 @@ public class KeikiManager : MonoBehaviour
 
     private void IsChangePaiMode()
     {
-            if (Random.value > 0.3f) // 確率で実行(Radom.Valueは0~1.0)
+        if (Random.value > 0.8f) // 確率で実行(Radom.Valueは0~1.0)
         {
-                int PaiMode = ChangePaiMode();
-                Debug.Log("パイズリモード変更:" + PaiMode);
+            paiMode = ChangePaiMode();
+            oppaianime.SetInteger("State",paiMode);
+            Debug.Log("パイズリモード変更:" + paiMode);
 
-                // 必要に応じて、gPaizuriPowerや他の変数にノイズを適用
-            }
+            // 必要に応じて、gPaizuriPowerや他の変数にノイズを適用
+        }
         ScheduleNextPaiMode(); // 次のノイズスケジュールを設定
     }
 
@@ -41,7 +43,7 @@ public class KeikiManager : MonoBehaviour
     private int ChangePaiMode()
     {
         // パイズリのモードを変える
-        int result = Random.Range(0, 3);//とりあえずランダムで
+        int result = Random.Range(0, 7); //とりあえずランダムで
         oppaiManager.SetPaiMode(result);
         return result;
     }

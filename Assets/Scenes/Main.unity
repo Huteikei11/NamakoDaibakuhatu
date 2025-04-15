@@ -2665,10 +2665,10 @@ PrefabInstance:
     - target: {fileID: 3626916397498700004, guid: 51d9277bd893fe84f900c2ebe604545a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -4299234477153967673, guid: 0c4909f9e561b0f4aa44691917a40333, type: 3}
+      objectReference: {fileID: 4154965977267789012, guid: 0c4909f9e561b0f4aa44691917a40333, type: 3}
     - target: {fileID: 3626916397498700004, guid: 51d9277bd893fe84f900c2ebe604545a, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 51d9277bd893fe84f900c2ebe604545a, type: 3}
       propertyPath: m_SortingOrder
@@ -4377,11 +4377,15 @@ MonoBehaviour:
   gameManager: {fileID: 1839694822}
   countdownTimer: {fileID: 33570461}
   scoreManager: {fileID: 1603796674}
+  oppaiManager: {fileID: 1893494320}
   gaman: {fileID: 1898853286}
-  shotnums: 01000000010000000100000001000000
+  keikianim: {fileID: 1893494323}
+  shotnums: 0a000000080000000600000003000000
   karioki: {fileID: 587439874}
   prefab: {fileID: 587439874}
-  spawnInterval: 1
+  spawnInterval: 0.8
+  rigbar: {fileID: 559933422}
+  controller2D: {fileID: 559933420}
 --- !u!1 &1872562460
 GameObject:
   m_ObjectHideFlags: 0
@@ -4550,11 +4554,17 @@ MonoBehaviour:
   paiMode: 2
   paiModevalues:
   - 1
-  - 1.5
+  - 1.3
   - 2
+  - 2.5
+  - 1.8
+  - 3
+  - 3.5
+  - 0.8
   isChecking: 0
   dangerCount: 0
   dangerAnime: {fileID: 615114433}
+  isFinish: 0
 --- !u!4 &1893494321
 Transform:
   m_ObjectHideFlags: 0
@@ -4584,6 +4594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oppaiManager: {fileID: 1893494320}
   paiMode: 0
+  oppaianime: {fileID: 1893494323}
 --- !u!95 &1893494323
 Animator:
   serializedVersion: 5
@@ -5068,7 +5079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2146482596
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5086,7 +5097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 354, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2146482597
@@ -5143,7 +5154,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2146482598
 MonoBehaviour:
