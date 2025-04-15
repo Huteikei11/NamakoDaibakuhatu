@@ -79,7 +79,7 @@ public class CountdownTimer : MonoBehaviour
 
     private IEnumerator FinishEvent()//ŒÄ‚Ño‚·ŠÖ”‚ğ‚Æ‚è‚ ‚¦‚¸¸”s‚Æ“¯‚¶‚É‚µ‚Ä‚¢‚é
     {
-        yield return StartCoroutine(DialogueController.Instance.FinishDialog());
+        yield return StartCoroutine(DialogueController.Instance.FinishDialog(true));
     }
 
     public float GetRemainingTime()

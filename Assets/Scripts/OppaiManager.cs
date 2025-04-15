@@ -178,6 +178,6 @@ public class OppaiManager : MonoBehaviour
 
     private IEnumerator FinishEvent()
     {
-        yield return StartCoroutine(DialogueController.Instance.FinishDialog());
+        yield return StartCoroutine(DialogueController.Instance.FinishDialog(false));
     }
 }

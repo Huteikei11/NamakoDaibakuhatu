@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class DialogueController : MonoBehaviour
@@ -8,7 +8,12 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private CountdownTimer countdownTimer;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private Gaman gaman;
+    [SerializeField] private int[] shotnums;
     public GameObject karioki;
+    [Header("è¤‡è£½ã—ãŸã„ãƒ—ãƒ¬ãƒãƒ–")]
+    public GameObject prefab;
+    [Header("ç”Ÿæˆé–“éš”ï¼ˆç§’ï¼‰")]
+    public float spawnInterval = 0.5f;
 
     private void Awake()
     {
@@ -30,7 +35,7 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    // w’è‚Ì•b”‘Ò‹@‚·‚éƒƒ\ƒbƒh
+    // æŒ‡å®šã®ç§’æ•°å¾…æ©Ÿã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public IEnumerator WaitForSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
@@ -38,40 +43,92 @@ public class DialogueController : MonoBehaviour
 
     public IEnumerator ShowDialogue()
     {
-        Debug.Log("ƒZƒŠƒt1: ‚±‚ñ‚É‚¿‚ÍI");
+        Debug.Log("ã‚»ãƒªãƒ•1: ã“ã‚“ã«ã¡ã¯ï¼");
         yield return StartCoroutine(WaitForEnterPress());
 
-        Debug.Log("ƒZƒŠƒt2: ­‚µ‘Ò‚Á‚Ä‚­‚¾‚³‚¢...");
-        yield return StartCoroutine(WaitForSeconds(2.0f)); // 2•b‘Ò‹@
+        Debug.Log("ã‚»ãƒªãƒ•2: å°‘ã—å¾…ã£ã¦ãã ã•ã„...");
+        yield return StartCoroutine(WaitForSeconds(2.0f)); // 2ç§’å¾…æ©Ÿ
 
-        Debug.Log("ƒZƒŠƒt3: ‚³‚æ‚¤‚È‚çI");
+        Debug.Log("ã‚»ãƒªãƒ•3: ã•ã‚ˆã†ãªã‚‰ï¼");
         yield return StartCoroutine(WaitForEnterPress());
 
-        Debug.Log("ƒ_ƒCƒAƒƒOI—¹");
+        Debug.Log("ãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†");
     }
 
-    public IEnumerator FinishDialog()//Ë¸‚ªI‚í‚Á‚½‚Æ‚«‚Ì‰‰o
-        //‚Æ‚è‚ ‚¦‚¸¸”s‚Æ¬Œ÷‚É‚Ç‚Á‚¿‚à‚±‚ê‚ª‚æ‚Ñ‚¾‚³‚ê‚é‚æ‚¤‚É‚µ‚Ä‚ ‚é
+    public void debugFinish(bool success)//ãƒœã‚¿ãƒ³ã§å‘¼ã³å‡ºã™ç”¨ï¼ˆãƒ‡ãƒãƒƒã‚°)
+    {
+        StartCoroutine(FinishDialog(success));
+    }
+    public IEnumerator FinishDialog(bool success)//å°„ç²¾ãŒçµ‚ã‚ã£ãŸã¨ãã®æ¼”å‡º
+        //ã¨ã‚Šã‚ãˆãšå¤±æ•—æ™‚ã¨æˆåŠŸæ™‚ã«ã©ã£ã¡ã‚‚ã“ã‚ŒãŒã‚ˆã³ã ã•ã‚Œã‚‹ã‚ˆã†ã«ã—ã¦ã‚ã‚‹
     {
         
-        //ƒ^ƒCƒ}[‚ÆƒXƒRƒAŒvZ‚ğ~‚ß‚é
+        //ã‚¿ã‚¤ãƒãƒ¼ã¨ã‚¹ã‚³ã‚¢è¨ˆç®—ã‚’æ­¢ã‚ã‚‹
         countdownTimer.StopTimer();
         scoreManager.StopLoop();
-        //“ü—Í‚ğ‚Æ‚ß‚é
+        //å…¥åŠ›ã‚’ã¨ã‚ã‚‹
         gaman.isOperable = false;
 
-        //‰‰o‚Æ‚©
-        Debug.Log("ƒZƒŠƒt1: ‚±‚ñ‚É‚¿‚ÍI");
-        karioki.SetActive(true);
-        yield return StartCoroutine(WaitForEnterPress());
-        karioki.SetActive(false);
-        //ƒŠƒUƒ‹ƒg‰æ–Ê
-        SceneManager.LoadScene("Result");
+        //æ¼”å‡ºã¨ã‹
+        Debug.Log("ã‚»ãƒªãƒ•1: ã“ã‚“ã«ã¡ã¯ï¼");
+        //karioki.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        //yield return StartCoroutine(WaitForEnterPress());
+
+        if (success)//æˆåŠŸæ™‚
+        {
+            int area = scoreManager.gamanArea;
+            int num = shotnums[area];
+            StartCoroutine(SpawnObjects(num,"Success"));
+
+        }
+        else//å¤±æ•—æ™‚
+        {
+            int area = scoreManager.gamanArea;
+            int num = shotnums[area];
+            StartCoroutine(SpawnObjects(num, "Failed"));
+        }
+
+        //karioki.SetActive(false);
+        //ãƒªã‚¶ãƒ«ãƒˆç”»é¢
+        //SceneManager.LoadScene("Result");
     }
+
+
+
+    IEnumerator SpawnObjects(int spawnCount, string triggerName)
+    {
+        for (int i = 0; i < spawnCount; i++)
+        {
+            GameObject instance = Instantiate(prefab, transform.position, Quaternion.identity);
+
+            // yåº§æ¨™ã ã‘ -3.9f ã«è¨­å®šï¼ˆx, z ã¯å…ƒã®ä½ç½®ã‚’ç¶­æŒï¼‰
+            Vector3 pos = instance.transform.position;
+            pos.y = -3.9f;
+            instance.transform.position = pos;
+
+            Animator animator = instance.GetComponent<Animator>();
+
+            if (animator != null)
+            {
+                int randomValue = Random.Range(0, 4); // 0ã€œ3ã®ãƒ©ãƒ³ãƒ€ãƒ ãªæ•´æ•°
+                animator.SetInteger("State", randomValue);
+                animator.SetTrigger(triggerName);
+            }
+            else
+            {
+                Debug.LogWarning("AnimatorãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ: " + instance.name);
+            }
+
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
 }
 
 
-/* ŒÄ‚Ño‚·‚Æ‚«‚ÌƒTƒ“ƒvƒ‹ƒvƒƒOƒ‰ƒ€
+
+/* å‘¼ã³å‡ºã™ã¨ãã®ã‚µãƒ³ãƒ—ãƒ«ãƒ—ãƒ­ã‚°ãƒ©ãƒ 
 using System.Collections;
 using UnityEngine;
 
@@ -84,11 +141,11 @@ public class EventManager : MonoBehaviour
 
     private IEnumerator StartEvent()
     {
-        Debug.Log("ƒCƒxƒ“ƒgŠJn");
+        Debug.Log("ã‚¤ãƒ™ãƒ³ãƒˆé–‹å§‹");
 
         yield return StartCoroutine(DialogueController.Instance.ShowDialogue());
 
-        Debug.Log("ƒCƒxƒ“ƒgI—¹");
+        Debug.Log("ã‚¤ãƒ™ãƒ³ãƒˆçµ‚äº†");
     }
 }
 
