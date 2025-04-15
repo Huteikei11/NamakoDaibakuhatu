@@ -91,8 +91,6 @@ public class DialogueController : MonoBehaviour
         {
             StartCoroutine(SpawnFailed("Failed"));
         }
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Result");
     }
 
 
@@ -126,6 +124,8 @@ public class DialogueController : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
         }
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Result");
     }
 
     IEnumerator SpawnFailed(string triggerName)
@@ -161,6 +161,8 @@ public class DialogueController : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
         }
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Result");
 
     }
 

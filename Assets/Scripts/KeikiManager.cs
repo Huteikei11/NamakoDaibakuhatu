@@ -21,14 +21,14 @@ public class KeikiManager : MonoBehaviour
 
     private void ScheduleNextPaiMode()
     {
-        float nextTime = Random.Range(3f, 6f); // 3〜10秒のランダムな時間を設定
+        float nextTime = Random.Range(2f, 4f); // ランダムな時間を設定
         Invoke("IsChangePaiMode", nextTime);
     }
 
 
     private void IsChangePaiMode()
     {
-        if (Random.value > 0.8f) // 確率で実行(Radom.Valueは0~1.0)
+        if (Random.value > 0.2f) // 確率で実行(Radom.Valueは0~1.0)
         {
             paiMode = ChangePaiMode();
             oppaianime.SetInteger("State",paiMode);
