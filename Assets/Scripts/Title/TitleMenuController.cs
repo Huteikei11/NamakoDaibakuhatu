@@ -15,6 +15,7 @@ public class TitleMenuController : MonoBehaviour
     public GameObject mainMenuContainer;
     public GameObject testMenuContainer;
     public GameObject exitMenuContainer;
+    [SerializeField] private SaveManager saveManager;
 
     private int selectedIndex = 0;
     private GameObject[] currentMenu;
@@ -185,7 +186,13 @@ public class TitleMenuController : MonoBehaviour
 
             else
             {
-                //ゲーム開始難易度選択
+                // ゲーム開始難易度選択
+                if (selectedIndex > saveManager.progress+1)
+                {
+                    Debug.Log("選択した難易度はまだ解放されていません。");
+                    return;
+                }
+
                 difficulty = selectedIndex; //難易度。読み込むときはTitleMenuController.difficulty
                 //A=0,B=1,C=2
                 Debug.Log("試験 " + ( difficulty.ToString()) + " 開始");

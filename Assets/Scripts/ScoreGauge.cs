@@ -7,11 +7,13 @@ public class ScoreGauge : MonoBehaviour
     public float[] sectionScores = { 0, 20, 40, 60, 80, 100, 120 }; // E, D, C, B, A, S, SSのスコア
     public float[] sectionXPositions = { -2f, -1.5f, -1f, -0.5f, 0f, 0.5f, 1f }; // 各スコアのx座標
     public float currentScore = 0; // 現在のスコア
+    public int rank = 0; // ランク
 
 
     void Update()
     {
         UpdateGauge();
+        rank = CalRank();
     }
 
     void UpdateGauge()
@@ -32,5 +34,22 @@ public class ScoreGauge : MonoBehaviour
             }
         }
         return sectionXPositions[sectionXPositions.Length - 1]; // SSの最大位置
+    }
+
+    public int CalRank()
+    {
+        for (int i = 0; i < sectionScores.Length - 1; i++)
+        {
+            if (currentScore >= sectionScores[i] && currentScore < sectionScores[i + 1])
+            {
+                return i;
+            }
+        }
+        return sectionScores.Length - 1; // SSの最大位置
+    }
+
+    public int GetRank()
+    {
+        return rank;
     }
 }

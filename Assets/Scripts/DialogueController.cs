@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class DialogueController : MonoBehaviour
 {
     public static DialogueController Instance { get; private set; }
@@ -9,6 +11,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private OppaiManager oppaiManager;
     [SerializeField] private Gaman gaman;
+    [SerializeField] private SaveManager saveManager;
+    [SerializeField] private ScoreGauge scoreGauge;
     public Animator keikianim;
     [SerializeField] private int[] shotnums;
     public GameObject karioki;
@@ -19,6 +23,17 @@ public class DialogueController : MonoBehaviour
     [Header("射精バー止める")]
     public Rigidbody2D rigbar;
     public ObjectController2D controller2D;
+    [Header("ランクごとのセリフを記録するリスト")]
+    public List<RankPhrases> rankPhrases = new List<RankPhrases>();
+
+    private int difficulty;
+    public float ejaculationScore;
+
+    [System.Serializable]
+    public class RankPhrases
+    {
+        public List<string> phrases;
+    }
 
     private void Awake()
     {
@@ -30,6 +45,12 @@ public class DialogueController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+
+    private void Start()
+    {
+        difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
     }
 
     public IEnumerator WaitForEnterPress()
@@ -64,10 +85,10 @@ public class DialogueController : MonoBehaviour
     {
         StartCoroutine(FinishDialog(success));
     }
-    public IEnumerator FinishDialog(bool success)//射精が終わったときの演出
-        //とりあえず失敗時と成功時にどっちもこれがよびだされるようにしてある
-    {
 
+    public IEnumerator FinishDialog(bool success)//射精が終わったときの演出
+    //とりあえず失敗時と成功時にどっちもこれがよびだされるようにしてある
+    {
         oppaiManager.isFinish = true;//失敗の処理をとめる
         //タイマーとスコア計算を止める
         countdownTimer.StopTimer();
@@ -80,19 +101,44 @@ public class DialogueController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //yield return StartCoroutine(WaitForEnterPress());
 
-        if (success)//成功時
+        if (success) // 成功時
         {
-            int area = Mathf.Min(scoreManager.gamanArea,3);
+            int area = Mathf.Min(scoreManager.gamanArea, 3);
             int num = shotnums[area];
-            StartCoroutine(SpawnObjects(num,"Success"));
+            float score = scoreManager.score; // スコアを取得
 
+            SaveRank(difficulty, scoreGauge.GetRank(), score); // セリフを保存する
+            StartCoroutine(SpawnObjects(num, "Success"));
         }
-        else//失敗時
+        else // 失敗時
         {
             StartCoroutine(SpawnFailed("Failed"));
         }
+
     }
 
+    private void SaveRank(int difficulty, int rank, float score)
+    {
+        if (rank < 0 || rank >= rankPhrases.Count)
+        {
+            Debug.LogError("Invalid rank value");
+            return;
+        }
+
+        List<string> phrases = rankPhrases[rank].phrases;
+        if (phrases == null || phrases.Count == 0)
+        {
+            Debug.LogError("No phrases available for the given rank");
+            return;
+        }
+
+        // ランダムにセリフを選択
+        int randomIndex = Random.Range(0, phrases.Count);
+        string selectedPhrase = phrases[randomIndex];
+
+        // SaveManagerのAddPlayRecordを呼び出してセーブ
+        saveManager.AddPlayRecord(difficulty, rank, selectedPhrase, score);
+    }
 
 
     IEnumerator SpawnObjects(int spawnCount, string triggerName)//成功
@@ -121,6 +167,7 @@ public class DialogueController : MonoBehaviour
             {
                 Debug.LogWarning("Animatorが見つかりませんでした: " + instance.name);
             }
+            scoreManager.score += ejaculationScore; // スコアを加算
 
             yield return new WaitForSeconds(spawnInterval);
         }
@@ -163,7 +210,6 @@ public class DialogueController : MonoBehaviour
         }
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Result");
-
     }
 
     private void StopObject()
@@ -173,30 +219,4 @@ public class DialogueController : MonoBehaviour
         controller2D.enabled = false;
         rigbar.velocity = Vector3.zero;
     }
-
-}
-
-
-
-/* 呼び出すときのサンプルプログラム
-using System.Collections;
-using UnityEngine;
-
-public class EventManager : MonoBehaviour
-{
-    private void Start()
-    {
-        StartCoroutine(StartEvent());
-    }
-
-    private IEnumerator StartEvent()
-    {
-        Debug.Log("イベント開始");
-
-        yield return StartCoroutine(DialogueController.Instance.ShowDialogue());
-
-        Debug.Log("イベント終了");
-    }
-}
-
- */
+}   

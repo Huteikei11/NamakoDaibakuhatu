@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     private List<Animator> allAnimators;
 
     public int difficulty;
+    public int gametime;
     [SerializeField] private CountdownTimer countdownTimer;
-
     private void Awake()
     {
         difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f); // フェード後に待機
 
         IsGameStarted = true;
-        countdownTimer.StartTimer(60f); // カウントダウン開始
+        countdownTimer.StartTimer(gametime); // カウントダウン開始
 
         TogglePause(); // ゲーム開始（ポーズ解除）
     }
