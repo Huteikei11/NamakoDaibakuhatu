@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Gaman : MonoBehaviour
 {
     [SerializeField]　private ObjectController2D suii;
     [SerializeField] private OppaiManager oppaiManager;
+    [SerializeField] private Animator animator;
     public float stamina;            // 現在のスタミナ
     public float maxStamina;         // スタミナの最大値
     public float staminaSpeed;       // スタミナ消費速度
@@ -83,9 +85,10 @@ public class Gaman : MonoBehaviour
                 lastGaman = false;
 
                 }
-                else if(stamina <= staminaSpeed)//スタミナ不足でグロッギー状態になる
+                if(stamina <= staminaSpeed+0.1)//スタミナ不足でグロッギー状態になる
                 {
                     stamina = 0;
+                    animator.SetBool("Groggy", true);
                     isGroggy = true;
                 }
             }
@@ -110,6 +113,7 @@ public class Gaman : MonoBehaviour
 
             if(stamina == maxStamina)//グロッギー状態を解除
             {
+                animator.SetBool("Groggy", false);
                 isGroggy = false;
             }
         }

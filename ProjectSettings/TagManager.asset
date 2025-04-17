@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: stamina
+    uniqueID: 2732799267
+    locked: 0
