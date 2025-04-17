@@ -66,7 +66,7 @@ public class OppaiManager : MonoBehaviour
             wValue -= wValueDecreaseRate * Time.deltaTime;
         }
         wValue = Mathf.Max(0, wValue); // wValue を 0 以上に制限
-        wValue = Mathf.Min(100, wValue); // wValue を 1000 以下に制限
+        wValue = Mathf.Min(1, wValue); // wValue を 1000 以下に制限
 
 
         // パイズリパワーを射精水位に適用

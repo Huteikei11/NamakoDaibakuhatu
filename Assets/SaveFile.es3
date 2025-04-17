@@ -1,0 +1,48 @@
+{
+	"PlayRecords" : {
+		"__type" : "System.Collections.Generic.List`1[[SaveManager+PlayRecord, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],mscorlib",
+		"value" : [
+			{
+				"difficulty" : 0,
+				"rank" : 6,
+				"resultPhraseNo" : "磨弓ちゃん凄い！想像以上ね！",
+				"score" : 1575
+			},{
+				"difficulty" : 0,
+				"rank" : 6,
+				"resultPhraseNo" : "ここまで出来ちゃうなんて…流石私の作品ね！",
+				"score" : 2588
+			},{
+				"difficulty" : 0,
+				"rank" : 6,
+				"resultPhraseNo" : "ここまで出来ちゃうなんて…流石私の作品ね！",
+				"score" : 3028
+			},{
+				"difficulty" : 0,
+				"rank" : 6,
+				"resultPhraseNo" : "くっさいわ～頑張り過ぎて臭いも量も大変よ～ どろどろで凄いわ、一緒にお風呂入りましょうか",
+				"score" : 2242
+			},{
+				"difficulty" : 0,
+				"rank" : 6,
+				"resultPhraseNo" : "くっさいわ～頑張り過ぎて臭いも量も大変よ～ どろどろで凄いわ、一緒にお風呂入りましょうか",
+				"score" : 1200
+			},{
+				"difficulty" : 0,
+				"rank" : 3,
+				"resultPhraseNo" : "もうちょっとなんだけど…仕方がないねえ",
+				"score" : 634
+			}
+		]
+	},
+	"Rank" : {
+		"__type" : "System.Int32[],mscorlib",
+		"value" : [
+			6,-1,-1
+		]
+	},
+	"Progress" : {
+		"__type" : "int",
+		"value" : 0
+	}
+}

@@ -139,6 +139,6 @@ public class ScoreManager : MonoBehaviour
     }
     private int wRatioCalulate(float w ,float origin)//通常時と今のパイズリパワーの比をいい感じに
     {
-        return (int)(((w*10/origin) * -1) -9);
+        return (int)((((w*10/origin) * -1))-9)/5 +1;
     }
 }
