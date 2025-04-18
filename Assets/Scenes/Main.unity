@@ -1884,7 +1884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bad90b5a56fe304ba1cd2803a759f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 1603796674}
+  suii: {fileID: 559933420}
+  mode: 0
 --- !u!4 &589255088
 Transform:
   m_ObjectHideFlags: 0
@@ -1910,7 +1911,7 @@ Animator:
   m_GameObject: {fileID: 589255086}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cb40782081101c74ba39dd6e2931fb14, type: 2}
+  m_Controller: {fileID: 9100000, guid: eaae668df1905bf4d88066d9d3d78131, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4853,6 +4854,7 @@ MonoBehaviour:
   gaman: {fileID: 1898853286}
   saveManager: {fileID: 1839694824}
   scoreGauge: {fileID: 87807687}
+  mayumiManager: {fileID: 589255087}
   keikianim: {fileID: 1893494323}
   shotnums: 0300000006000000080000000a000000
   karioki: {fileID: 587439874}

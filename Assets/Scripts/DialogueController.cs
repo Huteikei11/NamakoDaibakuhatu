@@ -13,6 +13,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private Gaman gaman;
     [SerializeField] private SaveManager saveManager;
     [SerializeField] private ScoreGauge scoreGauge;
+    [SerializeField] private MayumiManager mayumiManager;
     public Animator keikianim;
     [SerializeField] private int[] shotnums;
     public GameObject karioki;
@@ -143,8 +144,10 @@ public class DialogueController : MonoBehaviour
 
     IEnumerator SpawnObjects(int spawnCount, string triggerName)//成功
     {
-        //たまってる方 けいきのアニメーションを変える
+        // たまってる方 けいきのアニメーションを変える
         keikianim.SetTrigger(triggerName);
+        // まゆみちゃん射精表情
+        mayumiManager.mode = 1;
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -171,6 +174,9 @@ public class DialogueController : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
         }
+        // まゆみちゃん余韻表情
+        mayumiManager.mode = 2;
+
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Result");
     }
@@ -181,8 +187,10 @@ public class DialogueController : MonoBehaviour
         keikianim.SetTrigger(triggerName);
         yield return new WaitForSeconds(spawnInterval);
 
-        //発射する方　精液のアニメーションを出す
+        // まゆみちゃん射精表情
+        mayumiManager.mode = 1;
 
+        //発射する方　精液のアニメーションを出す
         int spawnCount = Random.Range(1, 5);//ランダムな回数射精
         for (int i = 0; i < spawnCount; i++)
         {
@@ -208,6 +216,9 @@ public class DialogueController : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
         }
+        // まゆみちゃん余韻表情
+        mayumiManager.mode = 2;
+
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Result");
     }

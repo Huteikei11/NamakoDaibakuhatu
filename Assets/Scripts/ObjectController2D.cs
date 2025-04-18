@@ -94,4 +94,14 @@ public class ObjectController2D : MonoBehaviour
             rb.velocity += new Vector2(0, velocity);
         }
     }
+
+    // Y座標の割合を計算するメソッド
+    public float GetYPositionRatio()
+    {
+        if (rb == null) return 0f;
+
+        // minY と maxY の範囲内での割合を計算
+        float clampedY = Mathf.Clamp(rb.position.y, minY, maxY);
+        return (clampedY - minY) / (maxY - minY);
+    }
 }
