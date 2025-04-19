@@ -104,7 +104,6 @@ public class DialogueController : MonoBehaviour
 
 
         float score = scoreManager.score; // スコアを取得
-
         SaveRank(difficulty, scoreGauge.GetRank(), score, success); // セリフを保存する
 
         if (success) // 成功時
