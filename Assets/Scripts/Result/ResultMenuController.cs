@@ -36,6 +36,10 @@ public class ResultMenuController : MonoBehaviour
                 initialXPositions[item] = dynamicMenuItems[2].transform.localPosition.x;
             }
         }
+        dynamicMenuItems[0].SetActive(false);
+        dynamicMenuItems[1].SetActive(false);
+        dynamicMenuItems[2].SetActive(false); // 2番目のオブジェクトは常に表示
+        cursor.SetActive(false); // カーソルを非表示にする
     }
 
     void Update()
