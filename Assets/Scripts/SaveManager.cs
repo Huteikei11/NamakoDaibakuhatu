@@ -17,6 +17,7 @@ public class SaveManager : MonoBehaviour
         public int rank;
         public string resultPhraseNo; // 型をstringに変更
         public float score; // scoreフィールドを追加
+        public bool isCleared; // クリア状態を記録する変数を追加
     }
 
     public int progress;
@@ -61,18 +62,22 @@ public class SaveManager : MonoBehaviour
         Debug.Log("SaveManager: LoadGameData called. Progress: " + progress + ", Ranks: " + string.Join(", ", ranks));
     }
 
-    public void AddPlayRecord(int difficulty, int rank, string resultPhraseNo, float score) // 引数にscoreを追加
+    public void AddPlayRecord(int difficulty, int rank, string resultPhraseNo, float score, bool isCleared) // 引数にisClearedを追加
     {
         PlayRecord newRecord = new PlayRecord
         {
             difficulty = difficulty,
             rank = rank,
             resultPhraseNo = resultPhraseNo,
-            score = score // scoreを設定
+            score = score, // scoreを設定
+            isCleared = isCleared // クリア状態を設定
         };
         playRecords.Add(newRecord);
-
-        UpdateProgressAndRanks(difficulty, rank);
+        if (isCleared)
+        {
+            // クリアした場合のみ進行状況を更新
+            UpdateProgressAndRanks(difficulty, rank);
+        }
         SaveGameData();
     }
 

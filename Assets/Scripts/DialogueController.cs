@@ -102,13 +102,15 @@ public class DialogueController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //yield return StartCoroutine(WaitForEnterPress());
 
+
+        float score = scoreManager.score; // スコアを取得
+
+        SaveRank(difficulty, scoreGauge.GetRank(), score, success); // セリフを保存する
+
         if (success) // 成功時
         {
             int area = Mathf.Min(scoreManager.gamanArea, 3);
             int num = shotnums[area];
-            float score = scoreManager.score; // スコアを取得
-
-            SaveRank(difficulty, scoreGauge.GetRank(), score); // セリフを保存する
             StartCoroutine(SpawnObjects(num, "Success"));
         }
         else // 失敗時
@@ -118,7 +120,7 @@ public class DialogueController : MonoBehaviour
 
     }
 
-    private void SaveRank(int difficulty, int rank, float score)
+    private void SaveRank(int difficulty, int rank, float score,bool clear)
     {
         if (rank < 0 || rank >= rankPhrases.Count)
         {
@@ -138,7 +140,7 @@ public class DialogueController : MonoBehaviour
         string selectedPhrase = phrases[randomIndex];
 
         // SaveManagerのAddPlayRecordを呼び出してセーブ
-        saveManager.AddPlayRecord(difficulty, rank, selectedPhrase, score);
+        saveManager.AddPlayRecord(difficulty, rank, selectedPhrase, score,clear);
     }
 
 

@@ -466,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 384797585}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.38, y: 2.01, z: 0}
+  m_LocalPosition: {x: 1.19, y: 2.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -988,6 +988,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: keiki_MenuBar
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: 3af0be8b8b6ee9443861ed590220ef68, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 3af0be8b8b6ee9443861ed590220ef68, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -1127,7 +1131,7 @@ Transform:
   m_GameObject: {fileID: 1445982320}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.86, y: 2.06, z: 0}
+  m_LocalPosition: {x: 4.86, y: 2.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1211,7 +1215,7 @@ Transform:
   m_GameObject: {fileID: 1640205499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.64, y: 3.3, z: 0}
+  m_LocalPosition: {x: 4.16, y: 3.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1329,7 +1333,7 @@ Transform:
   m_GameObject: {fileID: 1767855570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.72, y: 0, z: 0}
+  m_LocalPosition: {x: -2.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1391,7 +1395,7 @@ MonoBehaviour:
   difficulty: 0
   cursorMoveDuration: 0.2
   cursorOffsetX: -0.5
-  cursorX: 4.405
+  cursorX: 3.94
 --- !u!114 &1819642878
 MonoBehaviour:
   m_ObjectHideFlags: 0
