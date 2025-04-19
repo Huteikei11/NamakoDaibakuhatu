@@ -38,8 +38,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!IsGameStarted && Input.GetKeyDown(KeyCode.Return)) // Enter でゲーム開始
+
+        //if (!IsGameStarted && Input.GetKeyDown(KeyCode.Return)) // Enter でゲーム開始
+        if (!IsGameStarted) // Enter でゲーム開始
         {
+            IsGameStarted = true;
             StartCoroutine(StartGame());
         }
         else if (IsGameStarted && Input.GetKeyDown(KeyCode.Escape)) // Escape でポーズ切り替え
@@ -53,7 +56,7 @@ public class GameManager : MonoBehaviour
         //yield return FadeIn();
         yield return new WaitForSecondsRealtime(0.5f); // フェード後に待機
 
-        IsGameStarted = true;
+
         countdownTimer.StartTimer(gametime); // カウントダウン開始
 
         TogglePause(); // ゲーム開始（ポーズ解除）

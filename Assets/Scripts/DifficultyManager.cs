@@ -52,6 +52,6 @@ public class DifficultyManager : MonoBehaviour
     {
         SetDifficulty(difficulty);
         isGameCleared = false; // ゲーム開始時は未クリアにリセット
-        SceneManager.LoadScene(sceneName);
+        TransitionManager.Instance.TransitionToScene("Main");
     }
 }

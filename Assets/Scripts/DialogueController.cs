@@ -178,7 +178,7 @@ public class DialogueController : MonoBehaviour
         mayumiManager.mode = 2;
 
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("Result");
+        TransitionManager.Instance.TransitionToScene("Result");
     }
 
     IEnumerator SpawnFailed(string triggerName)
@@ -220,7 +220,7 @@ public class DialogueController : MonoBehaviour
         mayumiManager.mode = 2;
 
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("Result");
+        TransitionManager.Instance.TransitionToScene("Result");
     }
 
     private void StopObject()
