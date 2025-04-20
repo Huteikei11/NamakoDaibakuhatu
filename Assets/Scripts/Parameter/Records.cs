@@ -9,6 +9,7 @@ public class Records
 [Serializable]
 public class Record
 {
+    // Gaman関連データ
     public float maxStamina;
     public float staminaSpeed;
     public float gamanPower;
@@ -16,6 +17,8 @@ public class Record
     public float staminaRecoveryRate;
     public float staminaNotGamanRecoveryRate;
     public float staminaRecoveryInterval;
+
+    // OppaiManager関連データ
     public float adjustPaizuriPower;
     public float wValuePaizuriPowerAdjust;
     public float wValueIncreaseRate;
@@ -31,8 +34,22 @@ public class Record
     public float paiModevalues5;
     public float paiModevalues6;
     public float paiModevalues7;
+
+    // KeikiManager関連データ
     public float totrans;
     public float canceltrans;
     public float changePaimin;
     public float changePaiMax;
+
+    // ScoreManager関連データ
+    public float scoreAdjust;
+    public float gamanratioList0;
+    public float gamanratioList1;
+    public float gamanratioList2;
+    public float gamanratioList3;
+    public float gamanratioList4;
+    public float wRationAdjust;
+
+    // GameManager関連データ
+    public int gametime; // ゲーム時間
 }

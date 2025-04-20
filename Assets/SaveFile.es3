@@ -368,6 +368,78 @@
 				"resultPhraseNo" : "試験以前の問題ね～",
 				"score" : 57,
 				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "次こんな結果出したら作り直し。",
+				"score" : 77,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 136,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 81,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 60,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 373,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 139,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "次こんな結果出したら作り直し。",
+				"score" : 36,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 39,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 38,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 137,
+				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "次こんな結果出したら作り直し。",
+				"score" : 315,
+				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 218,
+				"isCleared" : false
 			}
 		]
 	},

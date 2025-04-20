@@ -244,7 +244,7 @@ public class TitleMenuController : MonoBehaviour
                 // DOTweenで退場（画面外へ移動）
                 float offScreenX = originalX - 10f; // 画面の外へ
 
-                cursor.transform.DOMoveX(offScreenX, 0.2f);
+                cursor.transform.DOMoveX(offScreenX, 0f);
                 StartCoroutine(ChangeScene(difficulty));
 
             }

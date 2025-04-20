@@ -7,6 +7,10 @@ public class Sample : MonoBehaviour
 {
     [SerializeField] private string accessKey;
 
+    private void Start()
+    {
+        StartCoroutine(GetData());
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
@@ -82,6 +86,23 @@ public class Sample : MonoBehaviour
                         keikiManager.changePaiMin = record.changePaimin;
                         keikiManager.changePaiMax = record.changePaiMax;
 
+                        // ScoreManagerスクリプトにデータを代入
+                        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+                        scoreManager.scoreAdjust = record.scoreAdjust;
+                        scoreManager.gamanratioList = new float[]
+                        {
+                            record.gamanratioList0,
+                            record.gamanratioList1,
+                            record.gamanratioList2,
+                            record.gamanratioList3,
+                            record.gamanratioList4
+                        };
+                        scoreManager.wRationAdjust = record.wRationAdjust;
+
+                        // GameManagerスクリプトにデータを代入
+                        GameManager gameManager = FindObjectOfType<GameManager>();
+                        gameManager.gametime = record.gametime;
+
                         Debug.Log("データ受信と代入成功！");
                     }
                     else
@@ -137,6 +158,14 @@ public class Sample : MonoBehaviour
         form.AddField("canceltrans", 0.3f.ToString());
         form.AddField("changePaimin", 0.2f.ToString());
         form.AddField("changePaiMax", 0.8f.ToString());
+        form.AddField("scoreAdjust", 1.0f.ToString());
+        form.AddField("gamanratioList0", 0.1f.ToString());
+        form.AddField("gamanratioList1", 0.2f.ToString());
+        form.AddField("gamanratioList2", 0.3f.ToString());
+        form.AddField("gamanratioList3", 0.4f.ToString());
+        form.AddField("gamanratioList4", 0.5f.ToString());
+        form.AddField("wRationAdjust", 0.8f.ToString());
+        form.AddField("gametime", 300.ToString()); // GameManagerのgametimeを送信
 
         // リクエストを送信
         var request = UnityWebRequest.Post("https://script.google.com/macros/s/" + accessKey + "/exec", form);
