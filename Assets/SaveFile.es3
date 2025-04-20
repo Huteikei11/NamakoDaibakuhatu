@@ -314,6 +314,30 @@
 				"resultPhraseNo" : "試験以前の問題ね～",
 				"score" : 627,
 				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 94,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "次こんな結果出したら作り直し。",
+				"score" : 103,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "次こんな結果出したら作り直し。",
+				"score" : 94,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 50,
+				"isCleared" : true
 			}
 		]
 	},

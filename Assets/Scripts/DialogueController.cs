@@ -62,24 +62,18 @@ public class DialogueController : MonoBehaviour
         }
     }
 
+    public IEnumerator WaitForAnyKeyPress()
+    {
+        while (!Input.anyKeyDown)
+        {
+            yield return null;
+        }
+    }
+
     // 指定の秒数待機するメソッド
     public IEnumerator WaitForSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-    }
-
-    public IEnumerator ShowDialogue()
-    {
-        Debug.Log("セリフ1: こんにちは！");
-        yield return StartCoroutine(WaitForEnterPress());
-
-        Debug.Log("セリフ2: 少し待ってください...");
-        yield return StartCoroutine(WaitForSeconds(2.0f)); // 2秒待機
-
-        Debug.Log("セリフ3: さようなら！");
-        yield return StartCoroutine(WaitForEnterPress());
-
-        Debug.Log("ダイアログ終了");
     }
 
     public void debugFinish(bool success)//ボタンで呼び出す用（デバッグ)
@@ -145,8 +139,19 @@ public class DialogueController : MonoBehaviour
 
     IEnumerator SpawnObjects(int spawnCount, string triggerName)//成功
     {
+        // 時間満了時の演出
+        // まゆみちゃんのアニメーションを止める
+        keikianim.speed = 0;
+        // 少し待つ
+        yield return new WaitForSeconds(2f);
+
         // たまってる方 けいきのアニメーションを変える
+        keikianim.speed = 1;
         keikianim.SetTrigger(triggerName);
+
+        //キー入力を待つ
+        yield return StartCoroutine(WaitForAnyKeyPress());
+
         // まゆみちゃん射精表情
         mayumiManager.mode = 1;
 
@@ -177,6 +182,7 @@ public class DialogueController : MonoBehaviour
         }
         // まゆみちゃん余韻表情
         mayumiManager.mode = 2;
+        keikianim.SetTrigger("AnyKey");//射精モーション止める
 
         yield return new WaitForSeconds(3f);
         TransitionManager.Instance.TransitionToScene("Result");
