@@ -791,12 +791,12 @@ MonoBehaviour:
   scoreManager: {fileID: 1603796674}
   sectionScores:
   - 0
-  - 200
-  - 400
-  - 600
-  - 800
-  - 900
-  - 1000
+  - 2000
+  - 4000
+  - 6000
+  - 9000
+  - 12000
+  - 17000
   sectionXPositions:
   - 2.475
   - 2.891

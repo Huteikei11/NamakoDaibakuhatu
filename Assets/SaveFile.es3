@@ -272,6 +272,30 @@
 				"resultPhraseNo" : "これじゃ全然だわー。もう少し堪えられないの？",
 				"score" : 210,
 				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 151,
+				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 157,
+				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
+				"score" : 288,
+				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "次こんな結果出したら作り直し。",
+				"score" : 366,
+				"isCleared" : false
 			}
 		]
 	},

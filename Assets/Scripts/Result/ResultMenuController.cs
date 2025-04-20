@@ -15,7 +15,7 @@ public class ResultMenuController : MonoBehaviour
     private bool dynamicOptionState = false;
     public int difficulty;
 
-    public float cursorMoveDuration = 0.2f; // カーソル移動のアニメーション時間
+    public float cursorMoveDuration = 0f; // カーソル移動のアニメーション時間
     public float cursorOffsetX = 0.5f; // カーソルのX方向のオフセット
 
     private GameObject lastMovedItem = null; // 前回動かしたメニュー項目

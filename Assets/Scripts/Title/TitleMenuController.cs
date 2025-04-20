@@ -31,6 +31,8 @@ public class TitleMenuController : MonoBehaviour
     public TitleKeiki titleKeiki;
     public TitleKuroobi titleKuroobi;
 
+    
+
     private bool isAllowMove;
     void Start()
     {
@@ -98,11 +100,11 @@ public class TitleMenuController : MonoBehaviour
         Animator cursorAnimator = cursor.GetComponent<Animator>();
         if (cursorAnimator != null)
         {
-            cursorAnimator.SetTrigger("End");
+            //cursorAnimator.SetTrigger("End");
         }
 
         float offScreenX = originalX - 10f;
-        cursor.transform.DOMoveX(offScreenX, 0.2f).OnComplete(() =>
+        cursor.transform.DOMoveX(offScreenX, 0f).OnComplete(() =>
         {
             // 退場完了後、カーソル位置をY更新
             Vector3 newPosition = cursor.transform.position;
@@ -123,7 +125,7 @@ public class TitleMenuController : MonoBehaviour
             // カーソル登場アニメーション（0.1秒待ってから）
             DOVirtual.DelayedCall(cursorDelay, () =>
             {
-                cursor.transform.DOMoveX(originalX, 0.2f).OnComplete(() =>
+                cursor.transform.DOMoveX(originalX, 0f).OnComplete(() =>
                 {
                     if (cursorAnimator != null)
                     {
@@ -213,7 +215,7 @@ public class TitleMenuController : MonoBehaviour
                 // DOTweenで退場（画面外へ移動）
                 float offScreenX = originalX - 10f; // 画面の外へ
 
-                cursor.transform.DOMoveX(offScreenX, 0.2f);
+                cursor.transform.DOMoveX(offScreenX, 0f);
                 StartCoroutine(ChangeScene(difficulty));
                     
             }
