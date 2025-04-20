@@ -64,6 +64,27 @@ public class SaveManager : MonoBehaviour
 
     public void AddPlayRecord(int difficulty, int rank, string resultPhraseNo, float score, bool isCleared) // 引数にisClearedを追加
     {
+        if (difficulty==0)
+        {
+            if (rank < 2)
+            {
+                isCleared = false; // 難易度0でランクが2以上の場合はクリアとする
+            }
+        }
+        else if (difficulty == 1)
+        {
+            if (rank < 4)
+            {
+                isCleared = false; // 難易度0でランクが2以上の場合はクリアとする
+            }
+        }
+        else if (difficulty == 2)
+        {
+            if (rank < 5)
+            {
+                isCleared = false; // 難易度0でランクが2以上の場合はクリアとする
+            }
+        }
         PlayRecord newRecord = new PlayRecord
         {
             difficulty = difficulty,

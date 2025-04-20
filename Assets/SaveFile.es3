@@ -440,6 +440,24 @@
 				"resultPhraseNo" : "挟んでちょっと動いただけじゃない。失敗作ね…。",
 				"score" : 218,
 				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 145,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 194,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 92,
+				"isCleared" : false
 			}
 		]
 	},
