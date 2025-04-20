@@ -296,6 +296,24 @@
 				"resultPhraseNo" : "次こんな結果出したら作り直し。",
 				"score" : 366,
 				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 272,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 305,
+				"isCleared" : false
+			},{
+				"difficulty" : 2,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 627,
+				"isCleared" : false
 			}
 		]
 	},

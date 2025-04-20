@@ -7,13 +7,18 @@ public class KeikiManager : MonoBehaviour
     [SerializeField] private OppaiManager oppaiManager;
     public int paiMode;
     public Animator oppaianime;
-    // Start is called before the first frame update
+
+    [SerializeField] private List<SpriteRenderer> sprites; // Inspectorから設定するスプライトリスト
+
+    private int difficulty;
+    public bool transparent = false;
+
     void Start()
     {
         ScheduleNextPaiMode();
+        difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         oppaiManager.SetPaiMode(paiMode);
@@ -25,26 +30,102 @@ public class KeikiManager : MonoBehaviour
         Invoke("IsChangePaiMode", nextTime);
     }
 
-
     private void IsChangePaiMode()
     {
         if (Random.value > 0.2f) // 確率で実行(Radom.Valueは0~1.0)
         {
             paiMode = ChangePaiMode();
-            oppaianime.SetInteger("State",paiMode);
+            oppaianime.SetInteger("State", paiMode);
             Debug.Log("パイズリモード変更:" + paiMode);
-
-            // 必要に応じて、gPaizuriPowerや他の変数にノイズを適用
         }
         ScheduleNextPaiMode(); // 次のノイズスケジュールを設定
     }
 
-    //パイズリモードを変える中身
     private int ChangePaiMode()
     {
-        // パイズリのモードを変える
-        int result = Random.Range(0, 7); //とりあえずランダムで
+        int result = Random.Range(0, 7); //とりあえず全パターン分
+
+        if (difficulty == 0 || result == 4) //難易度AのときはパイズリCを除外
+        {
+            result = Random.Range(5, 7);
+        }
+
+        if (difficulty == 2)
+        {
+            if (transparent)//透明を解除
+            {
+                if (Random.value > 0.5f)
+                {
+                    transparent = false;
+                    FadeInSprites(1f); // 透明度を徐々に下げる
+                }
+
+            }
+            else if (Random.value > 0.2f) // 見えなくなる確率
+            {
+                transparent = true;
+                FadeOutSprites(1f); // 透明度を徐々に上げる
+            }
+        }
+
         oppaiManager.SetPaiMode(result);
         return result;
+    }
+
+    // スプライトを徐々に暗くして見えなくするメソッド
+    public void FadeOutSprites(float duration)
+    {
+        StartCoroutine(FadeSpritesCoroutine(0f, duration));
+    }
+
+    // スプライトを元に戻すメソッド
+    public void FadeInSprites(float duration)
+    {
+        StartCoroutine(FadeSpritesCoroutine(1f, duration));
+    }
+
+    // スプライトの透明度を変更するコルーチン
+    private IEnumerator FadeSpritesCoroutine(float targetAlpha, float duration)
+    {
+        float elapsedTime = 0f;
+        List<Color> initialColors = new List<Color>();
+
+        // 初期カラーを保存
+        foreach (var sprite in sprites)
+        {
+            if (sprite != null)
+            {
+                initialColors.Add(sprite.color);
+            }
+        }
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+
+            for (int i = 0; i < sprites.Count; i++)
+            {
+                if (sprites[i] != null)
+                {
+                    Color color = initialColors[i];
+                    color.a = Mathf.Lerp(initialColors[i].a, targetAlpha, t);
+                    sprites[i].color = color;
+                }
+            }
+
+            yield return null;
+        }
+
+        // 最終的なアルファ値を設定
+        for (int i = 0; i < sprites.Count; i++)
+        {
+            if (sprites[i] != null)
+            {
+                Color color = sprites[i].color;
+                color.a = targetAlpha;
+                sprites[i].color = color;
+            }
+        }
     }
 }

@@ -2025,7 +2025,7 @@ MonoBehaviour:
   cursor: {fileID: 508650589}
   dynamicMenuContainer: {fileID: 1721964452}
   difficulty: 0
-  cursorMoveDuration: 0.2
+  cursorMoveDuration: 0
   cursorOffsetX: -0.5
   cursorX: 3.94
 --- !u!114 &1819642878

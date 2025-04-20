@@ -5238,7 +5238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 998290688}
   difficulty: 0
-  gametime: 15
+  gametime: 60
   countdownTimer: {fileID: 33570461}
 --- !u!114 &1839694823
 MonoBehaviour:
@@ -5522,6 +5522,11 @@ MonoBehaviour:
   oppaiManager: {fileID: 1893494320}
   paiMode: 0
   oppaianime: {fileID: 1893494323}
+  sprites:
+  - {fileID: 354292318}
+  - {fileID: 1318347735}
+  - {fileID: 559933423}
+  transparent: 0
 --- !u!95 &1893494323
 Animator:
   serializedVersion: 5

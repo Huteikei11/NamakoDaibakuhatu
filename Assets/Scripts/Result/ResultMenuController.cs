@@ -126,7 +126,7 @@ public class ResultMenuController : MonoBehaviour
         }
         else if (selectedIndex == 1)
         {
-            SceneManager.LoadScene("Title");
+            TransitionManager.Instance.TransitionToScene("Title");
         }
     }
 
