@@ -20,6 +20,9 @@ public class OppaiManager : MonoBehaviour
     public float wValueDecreaseRate = 0.04f; // Wキー離したときの減少率（秒間4%）
     public int paiMode;// パイズリのモーション
     public float[] paiModevalues = new float[8];// モーションごとのパイズリパワー
+    public float CNoisemin = 0.7f; // Cパターンのノイズの最小値
+    public float CNoiseMax = 2f; // Cパターンのノイズの最大値
+    public float CNoiseRandom = 0.5f; // Cパターンのノイズの確率（0~1.0）
 
     private bool isWKeyPressed = false;
 
@@ -133,7 +136,7 @@ public class OppaiManager : MonoBehaviour
     // ノイズを加える時間
     private void ScheduleNextNoise()
     {
-        float nextTime = Random.Range(0.7f, 2f); // 1〜2秒のランダムな時間を設定
+        float nextTime = Random.Range(CNoisemin, CNoiseMax); // 1〜2秒のランダムな時間を設定
         Invoke("CheckAndExecuteNoise", nextTime);
     }
 
@@ -142,7 +145,7 @@ public class OppaiManager : MonoBehaviour
     {
         if (paiMode == 4)// Cパターンの時に突発的に上がる
         {
-            if (Random.value > 0.5f) // 確率で実行(Radom.Valueは0~1.0)
+            if (Random.value > CNoiseRandom) // 確率で実行(Radom.Valueは0~1.0)
             {
                 float noise = G_PaizuriNoise();
                 Debug.Log("ビクッ（急増)" + noise);

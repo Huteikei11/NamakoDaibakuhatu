@@ -12,6 +12,10 @@ public class KeikiManager : MonoBehaviour
 
     private int difficulty;
     public bool transparent = false;
+    public float totrans = 0.2f; // 見えなくなる確率
+    public float canceltrans = 0.5f; // 透明を解除する確率
+    public float changePaiMin = 2f; // パイズリモード変更の最小時間
+    public float changePaiMax = 4f; // パイズリモード変更の最大時間
 
     void Start()
     {
@@ -26,7 +30,7 @@ public class KeikiManager : MonoBehaviour
 
     private void ScheduleNextPaiMode()
     {
-        float nextTime = Random.Range(2f, 4f); // ランダムな時間を設定
+        float nextTime = Random.Range(changePaiMin, changePaiMax); // ランダムな時間を設定
         Invoke("IsChangePaiMode", nextTime);
     }
 
@@ -54,14 +58,14 @@ public class KeikiManager : MonoBehaviour
         {
             if (transparent)//透明を解除
             {
-                if (Random.value > 0.5f)
+                if (Random.value > canceltrans)
                 {
                     transparent = false;
                     FadeInSprites(1f); // 透明度を徐々に下げる
                 }
 
             }
-            else if (Random.value > 0.2f) // 見えなくなる確率
+            else if (Random.value > totrans) // 見えなくなる確率
             {
                 transparent = true;
                 FadeOutSprites(1f); // 透明度を徐々に上げる

@@ -344,6 +344,30 @@
 				"resultPhraseNo" : "磨弓ちゃん凄い！想像以上ね！",
 				"score" : -46,
 				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 74,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "次こんな結果出したら作り直し。",
+				"score" : 79,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 66,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 0,
+				"resultPhraseNo" : "試験以前の問題ね～",
+				"score" : 57,
+				"isCleared" : true
 			}
 		]
 	},

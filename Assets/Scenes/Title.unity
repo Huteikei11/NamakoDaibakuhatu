@@ -4056,6 +4056,7 @@ MonoBehaviour:
   titleLogo: {fileID: 526468334}
   titleKeiki: {fileID: 1276667560}
   titleKuroobi: {fileID: 281230567}
+  isAnimating: 0
 --- !u!1 &1764365166
 GameObject:
   m_ObjectHideFlags: 0
