@@ -338,17 +338,23 @@
 				"resultPhraseNo" : "試験以前の問題ね～",
 				"score" : 50,
 				"isCleared" : true
+			},{
+				"difficulty" : 2,
+				"rank" : 6,
+				"resultPhraseNo" : "磨弓ちゃん凄い！想像以上ね！",
+				"score" : -46,
+				"isCleared" : true
 			}
 		]
 	},
 	"Rank" : {
 		"__type" : "System.Int32[],mscorlib",
 		"value" : [
-			6,1,-1
+			6,1,6
 		]
 	},
 	"Progress" : {
 		"__type" : "int",
-		"value" : 1
+		"value" : 2
 	}
 }

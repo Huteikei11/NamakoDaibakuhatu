@@ -32,7 +32,7 @@ public class TitleMenuController : MonoBehaviour
     public TitleKuroobi titleKuroobi;
 
     private bool isAllowMove;
-    private bool isAnimating = false; // アニメーション中かどうかを判定するフラグ
+    public bool isAnimating = false; // アニメーション中かどうかを判定するフラグ
 
     void Start()
     {
@@ -50,7 +50,7 @@ public class TitleMenuController : MonoBehaviour
     void PlayInitialAnimation()
     {
         // 初期アニメーション終了後に isAnimating を false にリセット
-        DOVirtual.DelayedCall(3f, () =>
+        DOVirtual.DelayedCall(2.5f, () =>
         {
             isAnimating = false;
         });
@@ -117,6 +117,7 @@ public class TitleMenuController : MonoBehaviour
         }
 
         float offScreenX = originalX - 10f;
+        isAnimating = false;
 
         // アニメーション開始
         isAnimating = true;
@@ -213,6 +214,39 @@ public class TitleMenuController : MonoBehaviour
                 {
                     isAnimating = false;
                 });
+            }
+            else
+            {
+                // ゲーム開始難易度選択
+                if (selectedIndex > saveManager.progress + 1)
+                {
+                    Debug.Log("選択した難易度はまだ解放されていません。");
+                    return;
+                }
+
+                difficulty = selectedIndex; //難易度。読み込むときはTitleMenuController.difficulty
+                //A=0,B=1,C=2
+                Debug.Log("試験 " + (difficulty.ToString()) + " 開始");
+                for (int i = 0; i <= 3; i++)
+                {
+                    float delay = (i == difficulty) ? 0.1f : 0.3f;
+                    ToOriginaltestMenuItemAt(i, delay);
+                    ToOriginalRunkAt(i, delay);
+                }
+
+                // AnimatorのTriggerでCloseアニメーションを再生
+                Animator cursorAnimator = cursor.GetComponent<Animator>();
+                if (cursorAnimator != null)
+                {
+                    cursorAnimator.SetTrigger("End");
+                }
+
+                // DOTweenで退場（画面外へ移動）
+                float offScreenX = originalX - 10f; // 画面の外へ
+
+                cursor.transform.DOMoveX(offScreenX, 0.2f);
+                StartCoroutine(ChangeScene(difficulty));
+
             }
         }
     }
