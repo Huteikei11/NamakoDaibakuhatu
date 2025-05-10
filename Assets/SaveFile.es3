@@ -458,6 +458,18 @@
 				"resultPhraseNo" : "試験以前の問題ね～",
 				"score" : 92,
 				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 3,
+				"resultPhraseNo" : "もうちょっとなんだけど…仕方がないねえ",
+				"score" : 8446,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 2,
+				"resultPhraseNo" : "まあぼちぼちって感じね。ここから頑張りましょ",
+				"score" : 4094,
+				"isCleared" : false
 			}
 		]
 	},
