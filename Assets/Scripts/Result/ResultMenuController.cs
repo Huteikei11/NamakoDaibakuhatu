@@ -57,6 +57,8 @@ public class ResultMenuController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             SelectOption();
+
+
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -111,6 +113,12 @@ public class ResultMenuController : MonoBehaviour
     void SelectOption()
     {
         if (currentMenu.Count == 0) return;
+
+        // ƒV[ƒ“‘JˆÚŒã‚ÉBGMManager‚ğíœ
+        if (BGMManager.Instance != null)
+        {
+            BGMManager.Instance.DestroyBGMManager();
+        }
 
         if (selectedIndex == 0)
         {
