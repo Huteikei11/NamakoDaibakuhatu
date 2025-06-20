@@ -5,7 +5,7 @@ using System;
 
 public class CountdownTimer : MonoBehaviour
 {
-    private float duration; // タイマーの初期時間（秒）
+    private float duration = 30; // タイマーの初期時間（秒）
     private float remainingTime; // 残り時間
     private bool isRunning = false;
     private Coroutine timerCoroutine;

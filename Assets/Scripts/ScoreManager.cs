@@ -39,7 +39,8 @@ public class ScoreManager : MonoBehaviour
     {
         suiiscript = suii.GetComponent<ObjectController2D>();
         oppai = Oppai.GetComponent<OppaiManager>();
-        InvokeRepeating("ScoreDisplay", 0.0f, roopInterval);
+        // InvokeRepeating("ScoreDisplay", 0.0f, roopInterval);
+        // GameManager‚©‚çŠJŽn‚ðŽwŽ¦
     }
 
     void Update()
