@@ -85,10 +85,10 @@ public class TransitionManager : MonoBehaviour
                     if (target.destinationXPositions.Count > i) // 目的地が指定されている場合のみ
                     {
                         float destinationX = target.destinationXPositions[i]; // i番目の目的地を取得
-                        target.animator.transform.DOMoveX(destinationX, 0.3f).SetEase(Ease.InOutQuad);
+                        target.animator.transform.DOMoveX(destinationX, 0.2f).SetEase(Ease.InOutQuad);
                     }
                 }
-                yield return new WaitForSeconds(0.2f); // 遅延
+                yield return new WaitForSeconds(0.1f); // 遅延
             }
         }
         // 追加のアニメーターを表示
@@ -102,7 +102,7 @@ public class TransitionManager : MonoBehaviour
                 spriteRenderer.color = color;
             }
             additionalAnimators[n].SetTrigger("Start");
-            yield return new WaitForSeconds(0.1f); // 遅延
+            yield return new WaitForSeconds(0.06f); // 遅延
         }
 
         // 2. すべてのオブジェクトに SetTrigger("Blue") を送信
@@ -131,7 +131,7 @@ public class TransitionManager : MonoBehaviour
         for (int n = additionalAnimators.Count-1; n >=0; n--)
         {
             additionalAnimators[n].SetTrigger("End");
-            yield return new WaitForSeconds(0.1f); // 遅延
+            yield return new WaitForSeconds(0.06f); // 遅延
             var spriteRenderer = additionalAnimators[n].GetComponent<SpriteRenderer>();
             if (spriteRenderer != null)
             {
@@ -148,9 +148,9 @@ public class TransitionManager : MonoBehaviour
             for (int j = Mathf.Min(targets.Count - 1, targets.Count - 1 - i); j >= Mathf.Max(0, targets.Count - 2 - i); j--)
             {
                 var target = targets[j];
-                target.animator.transform.DOMoveX(target.initialXPosition, 0.3f).SetEase(Ease.InOutQuad); // 初期位置に戻す
+                target.animator.transform.DOMoveX(target.initialXPosition, 0.2f).SetEase(Ease.InOutQuad); // 初期位置に戻す
             }
-            yield return new WaitForSeconds(0.2f); // 遅延
+            yield return new WaitForSeconds(0.1f); // 遅延
         }
 
 
