@@ -14,6 +14,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private SaveManager saveManager;
     [SerializeField] private ScoreGauge scoreGauge;
     [SerializeField] private MayumiManager mayumiManager;
+    [SerializeField] private SyaseiGageBeat syaseiGageBeat;
     public Animator keikianim;
     [SerializeField] private int[] shotnums;
     public GameObject karioki;
@@ -91,6 +92,8 @@ public class DialogueController : MonoBehaviour
         //入力をとめる
         gaman.isOperable = false;
         StopObject();
+        // 鼓動を止める
+        syaseiGageBeat.PauseBeat();
 
         //演出とか
         yield return new WaitForSeconds(0.5f);

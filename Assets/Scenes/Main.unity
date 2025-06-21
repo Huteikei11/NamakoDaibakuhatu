@@ -1100,7 +1100,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4758,7 +4758,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4852,9 +4852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cd1c29bce07124ebaba95392db65d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 1603796674}
+  objectController2D: {fileID: 559933420}
   audioSource: {fileID: 1675629576}
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 513c69bd0fc5642409a68425762ba623, type: 3}
   audioSpeed: 1
 --- !u!4 &1675629578
 Transform:
@@ -5581,6 +5581,7 @@ MonoBehaviour:
   saveManager: {fileID: 1839694824}
   scoreGauge: {fileID: 87807687}
   mayumiManager: {fileID: 589255087}
+  syaseiGageBeat: {fileID: 1675629577}
   keikianim: {fileID: 1893494323}
   shotnums: 0300000006000000080000000a000000
   karioki: {fileID: 587439874}
@@ -5917,7 +5918,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -4616496681710740317, guid: dcf27cede40652744ae0bd88affd89bd, type: 3}
+  m_Sprite: {fileID: 6572102940232937819, guid: d33ccab6955a206458be50723459415d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

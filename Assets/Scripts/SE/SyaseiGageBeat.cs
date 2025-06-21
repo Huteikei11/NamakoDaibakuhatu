@@ -4,23 +4,60 @@ using UnityEngine;
 
 public class SyaseiGageBeat : MonoBehaviour
 {
-
-    public ScoreManager scoreManager; // Canvas_score スコアマネージャーにアタッチされているスクリプトを参照するための変数
-    public AudioSource audioSource; // AudioSource コンポーネントを参照するための変数
+    public ObjectController2D objectController2D;
+    public AudioSource audioSource;
     public AudioClip audioClip;
 
-    public float audioSpeed = 1.0f; // 再生速度を調整するための変数
-    // 80%から鼓動
-    // 再生速度を変える
-    // Start is called before the first frame update
-    void Start()
+    public float audioSpeed = 1.0f;
+
+    private bool isPaused = false; // 外部からの一時停止状態
+
+    // 外部から鼓動を一時停止
+    public void PauseBeat()
     {
-        
+        isPaused = true;
+        if (audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
     }
 
-    // Update is called once per frame
+    // 外部から鼓動を再開
+    public void ResumeBeat()
+    {
+        isPaused = false;
+        if (audioSource.clip == audioClip && !audioSource.isPlaying)
+        {
+            audioSource.UnPause();
+        }
+    }
+
     void Update()
     {
-        
+        if (isPaused)
+        {
+            return;
+        }
+
+        float persent = objectController2D.GetYPositionRatio();
+        if (persent > 0.8f)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = audioClip;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+            float pitch = Mathf.Clamp(0.5f + (persent - 0.8f) * 6.5f, 0.5f, 1.5f);
+            audioSource.pitch = pitch;
+            audioSource.volume = Mathf.Clamp(0.1f + (persent - 0.8f) * 3f, 0.1f, 0.7f);
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
     }
 }
