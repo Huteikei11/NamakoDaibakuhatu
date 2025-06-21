@@ -12,6 +12,8 @@ public class TransitionTarget
     public Animator animator;
     public List<float> destinationXPositions = new List<float>(); // 目的地の座標を6つ指定
     [HideInInspector] public float initialXPosition; // 起動時のX座標を保存
+
+
 }
 
 public class TransitionManager : MonoBehaviour
@@ -28,6 +30,12 @@ public class TransitionManager : MonoBehaviour
     [SerializeField] private float fadeOutDuration = 1.0f;
     [SerializeField] private float fadeInDelay = 0.5f;
     [SerializeField] private float logoDelay = 1.0f;
+
+    [Header("効果音")]
+    [SerializeField] private AudioSource seAudioSource;
+    [SerializeField] private AudioClip seClipClose;
+    [SerializeField] private AudioClip seClipOpen;
+    [SerializeField] private AudioClip seClipBlue;
 
     private string nextSceneName;
 
@@ -74,9 +82,13 @@ public class TransitionManager : MonoBehaviour
     private IEnumerator TransitionRoutine()
     {
 
+        //　閉じる音
+        seAudioSource.PlayOneShot(seClipClose);
         // 1. FadeOut を遅らせて 3 回ずつ適用
         for (int i = 0; i < 3; i++)
         {
+
+
             for (int j = 0; j < targets.Count; j += 2) // 2つずつ処理
             {
                 for (int k = j; k < j + 2 && k < targets.Count; k++) // j番目から2つのターゲットを処理
@@ -88,7 +100,7 @@ public class TransitionManager : MonoBehaviour
                         target.animator.transform.DOMoveX(destinationX, 0.2f).SetEase(Ease.InOutQuad);
                     }
                 }
-                yield return new WaitForSeconds(0.1f); // 遅延
+                yield return new WaitForSeconds(0.06f); // 遅延
             }
         }
         // 追加のアニメーターを表示
@@ -104,6 +116,10 @@ public class TransitionManager : MonoBehaviour
             additionalAnimators[n].SetTrigger("Start");
             yield return new WaitForSeconds(0.06f); // 遅延
         }
+
+        //　閉じる音
+        yield return new WaitForSeconds(0.1f); // 遅延
+        seAudioSource.PlayOneShot(seClipBlue);
 
         // 2. すべてのオブジェクトに SetTrigger("Blue") を送信
         foreach (var target in targets)
@@ -142,6 +158,8 @@ public class TransitionManager : MonoBehaviour
 
         }
 
+        //　あける音
+        seAudioSource.PlayOneShot(seClipOpen);
         // 4. 最初の位置に戻す (後ろの target から2つずつ移動)
         for (int i = 0; i < targets.Count; i += 2)
         {
