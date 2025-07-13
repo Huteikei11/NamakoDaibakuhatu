@@ -6,6 +6,7 @@ public class KeikiManager : MonoBehaviour
 {
     [SerializeField] private OppaiManager oppaiManager;
     public int paiMode;
+    public int beforepaiMode;
     public Animator oppaianime;
 
     [SerializeField] private List<SpriteRenderer> sprites; // Inspectorから設定するスプライトリスト
@@ -16,6 +17,8 @@ public class KeikiManager : MonoBehaviour
     public float canceltrans = 0.5f; // 透明を解除する確率
     public float changePaiMin = 2f; // パイズリモード変更の最小時間
     public float changePaiMax = 4f; // パイズリモード変更の最大時間
+
+        [SerializeField] SpeechBubbleManager_SpriteRenderer speechBubble;
 
     void Start()
     {
@@ -72,6 +75,25 @@ public class KeikiManager : MonoBehaviour
             }
         }
 
+        // 吹き出しの処理
+        if (result == 2 || result == 3)
+        {
+            // ぎゅ～
+            speechBubble.HukidasiGYU();
+        }
+        else if ((beforepaiMode == 0 || beforepaiMode == 2 || beforepaiMode == 5) && (result == 1 || result == 3 || result == 6))
+        {
+            // 早くなる
+            speechBubble.HukidasiSpeedUP();
+        }
+        else if ((result == 0 || result == 2 || result == 5) && (beforepaiMode == 1 || beforepaiMode == 3 || beforepaiMode == 6))
+        {
+            // 遅くなる
+            speechBubble.HukidasiSpeedDOWN();
+        }
+
+
+        beforepaiMode = result;
         oppaiManager.SetPaiMode(result);
         return result;
     }

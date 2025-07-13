@@ -566,6 +566,42 @@
 				"resultPhraseNo" : "まぁ、いい感じ？満足は出来ない結果だけど",
 				"score" : 7028,
 				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 2,
+				"resultPhraseNo" : "谷間の中でドクドク脈打つ力があるなら我慢に使いなさい、わかる？",
+				"score" : 4178,
+				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 2,
+				"resultPhraseNo" : "気持ちいいっていうのは結構だけど、もう少し我慢できないの？",
+				"score" : 4242,
+				"isCleared" : true
+			},{
+				"difficulty" : 2,
+				"rank" : 2,
+				"resultPhraseNo" : "谷間の中でドクドク脈打つ力があるなら我慢に使いなさい、わかる？",
+				"score" : 4506,
+				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 2,
+				"resultPhraseNo" : "気持ちいいっていうのは結構だけど、もう少し我慢できないの？",
+				"score" : 5014,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 2,
+				"resultPhraseNo" : "まあぼちぼちって感じね。ここから頑張りましょ",
+				"score" : 4474,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 1,
+				"resultPhraseNo" : "あーあー全部乳内（ナカ）で出しちゃって…",
+				"score" : 3598,
+				"isCleared" : false
 			}
 		]
 	},

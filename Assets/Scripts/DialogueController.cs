@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Febucci.UI.Actions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private ScoreGauge scoreGauge;
     [SerializeField] private MayumiManager mayumiManager;
     [SerializeField] private SyaseiGageBeat syaseiGageBeat;
+    [SerializeField] private SpeechBubbleManager_SpriteRenderer speechBubble;
     public Animator keikianim;
     [SerializeField] private int[] shotnums;
     public GameObject karioki;
@@ -152,6 +154,9 @@ public class DialogueController : MonoBehaviour
         keikianim.speed = 1;
         keikianim.SetTrigger(triggerName);
 
+        speechBubble.HukidasiStageClear(); // ステージクリアの吹き出しを表示
+        speechBubble.StopDisplay(); // ステージクリアの吹き出しを止める
+
         //キー入力を待つ
         yield return StartCoroutine(WaitForAnyKeyPress());
 
@@ -199,6 +204,9 @@ public class DialogueController : MonoBehaviour
 
         // まゆみちゃん射精表情
         mayumiManager.mode = 1;
+
+        speechBubble.HukidasiFailed(); // 失敗の吹き出しを表示
+        speechBubble.StopDisplay(); // 失敗の吹き出しを止める
 
         //発射する方　精液のアニメーションを出す
         int spawnCount = Random.Range(1, 5);//ランダムな回数射精

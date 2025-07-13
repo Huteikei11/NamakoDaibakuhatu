@@ -37,6 +37,7 @@ public class OppaiManager : MonoBehaviour
     private float checkCooldown = 1f; // 射精しそうな時のクールタイム(重ならないように)
     public bool isFinish;// 射精を一度したらtrue
 
+
     // Start is called before the first frame update
     void Start()
     {
