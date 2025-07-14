@@ -602,13 +602,37 @@
 				"resultPhraseNo" : "あーあー全部乳内（ナカ）で出しちゃって…",
 				"score" : 3598,
 				"isCleared" : false
+			},{
+				"difficulty" : 2,
+				"rank" : 2,
+				"resultPhraseNo" : "気持ちいいっていうのは結構だけど、もう少し我慢できないの？",
+				"score" : 4764,
+				"isCleared" : false
+			},{
+				"difficulty" : 1,
+				"rank" : 4,
+				"resultPhraseNo" : "あなたが我慢したのが\”ダマ\”になった精液から伝わってくるわ！",
+				"score" : 9626,
+				"isCleared" : true
+			},{
+				"difficulty" : 2,
+				"rank" : 1,
+				"resultPhraseNo" : "あーあー全部乳内（ナカ）で出しちゃって…",
+				"score" : 2702,
+				"isCleared" : false
+			},{
+				"difficulty" : 1,
+				"rank" : 2,
+				"resultPhraseNo" : "気持ちいいっていうのは結構だけど、もう少し我慢できないの？",
+				"score" : 4908,
+				"isCleared" : false
 			}
 		]
 	},
 	"Rank" : {
 		"__type" : "System.Int32[],mscorlib",
 		"value" : [
-			6,1,6
+			6,4,6
 		]
 	},
 	"Progress" : {
