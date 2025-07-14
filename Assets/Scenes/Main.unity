@@ -1310,7 +1310,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 870fd6ec9fd9ad54ab53032dc5474709, type: 3}
   initialDelay: 7
   displayInterval: 5
-  fadeOutDuration: 2
+  fadeOutDuration: 1.4
   Failed: {fileID: 21300000, guid: 30d5aa9235ce37c43babce8a993b26b5, type: 3}
   GYU: {fileID: 21300000, guid: 93f04f47f4cd6764c81d5c347ed8260a, type: 3}
   StageClear: {fileID: 21300000, guid: 6054dc5b76a26c14ab6bbc1172f6744a, type: 3}

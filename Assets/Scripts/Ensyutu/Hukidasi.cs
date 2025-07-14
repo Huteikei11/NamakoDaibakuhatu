@@ -16,6 +16,7 @@ public class SpeechBubbleManager_SpriteRenderer : MonoBehaviour
     private Coroutine displayCoroutine;
     private bool isDisplayingSpecialBubble = false;
     private bool isDisplayingEnabled = true; // 吹き出し表示が有効かどうかを管理するフラグ
+    private bool isBubbleVisible = false; // 現在吹き出しが表示中かどうか
 
     public Sprite Failed;
     public Sprite GYU;
@@ -81,11 +82,13 @@ public class SpeechBubbleManager_SpriteRenderer : MonoBehaviour
     {
         if (!isDisplayingEnabled) return; // 表示が無効なら何もしない
 
+
         // 現在表示中の吹き出しがあればDOTweenのアニメーションを停止
         speechBubbleSpriteRenderer.DOKill(true);
 
         speechBubbleSpriteRenderer.sprite = spriteToDisplay;
         speechBubbleSpriteRenderer.color = new Color(1, 1, 1, 1); // 不透明にする
+        isBubbleVisible = true;
 
         // fadeOutDuration秒後にフェードアウトを開始
         if (displaytime) { //変えたいときはこっち
@@ -99,6 +102,7 @@ public class SpeechBubbleManager_SpriteRenderer : MonoBehaviour
         {
             isDisplayingSpecialBubble = false;
         }
+        isBubbleVisible = false;
     });
         }
 
@@ -115,6 +119,7 @@ public class SpeechBubbleManager_SpriteRenderer : MonoBehaviour
         {
             isDisplayingSpecialBubble = false;
         }
+        isBubbleVisible = false;
     });
         }
 
@@ -124,27 +129,30 @@ public class SpeechBubbleManager_SpriteRenderer : MonoBehaviour
     /// 特定の吹き出しを割り込んで表示します。
     /// </summary>
     /// <param name="specialSprite">割り込んで表示するスプライト</param>
-    public void DisplaySpecialBubble(Sprite specialSprite,bool display = false ,float displayvalue = 5f)
+public void DisplaySpecialBubble(Sprite specialSprite, bool display = false, float displayvalue = 5f, bool force = false)
+{
+    if (!isDisplayingEnabled) return; // 表示が無効なら割り込みもできない
+
+    if (specialSprite == null)
     {
-        if (!isDisplayingEnabled) return; // 表示が無効なら割り込みもできない
-
-        if (specialSprite == null)
-        {
-            Debug.LogWarning("割り込み表示するスプライトが指定されていません。");
-            return;
-        }
-
-        isDisplayingSpecialBubble = true;
-        DisplayBubble(specialSprite,display,displayvalue);
-
-        // 自動表示のコルーチンをリセットして、割り込み表示後に通常の表示間隔を再開
-        if (displayCoroutine != null)
-        {
-            StopCoroutine(displayCoroutine);
-            // ここでは初期遅延をスキップして、すぐに通常のループに戻るようにします
-            displayCoroutine = StartCoroutine(AutoDisplayBubblesRoutineAfterInterruption());
-        }
+        Debug.LogWarning("割り込み表示するスプライトが指定されていません。");
+        return;
     }
+
+    // すでに吹き出しが表示中なら割り込まない（force=trueなら無視して表示）
+    if (isBubbleVisible && !force) return;
+
+    isDisplayingSpecialBubble = true;
+    DisplayBubble(specialSprite, display, displayvalue);
+
+    // 自動表示のコルーチンをリセットして、割り込み表示後に通常の表示間隔を再開
+    if (displayCoroutine != null)
+    {
+        StopCoroutine(displayCoroutine);
+        // ここでは初期遅延をスキップして、すぐに通常のループに戻るようにします
+        displayCoroutine = StartCoroutine(AutoDisplayBubblesRoutineAfterInterruption());
+    }
+}
 
     /// <summary>
     /// 割り込み表示後に通常の吹き出し表示ループを再開するためのコルーチンです。
@@ -175,6 +183,7 @@ public class SpeechBubbleManager_SpriteRenderer : MonoBehaviour
         speechBubbleSpriteRenderer.DOKill(true); // DOTweenアニメーションを強制終了
         speechBubbleSpriteRenderer.color = new Color(1, 1, 1, 0); // 即座に透明にする
         isDisplayingSpecialBubble = false; // 特殊吹き出しフラグも解除
+        isBubbleVisible = false;
     }
 
     // --- 新規追加メソッド ---
@@ -206,20 +215,22 @@ public class SpeechBubbleManager_SpriteRenderer : MonoBehaviour
         }
     }
 
-    public void HukidasiFailed()
-    {
-        DisplaySpecialBubble(Failed,true,4f);
-    }
+
+public void HukidasiFailed()
+{
+    DisplaySpecialBubble(Failed, true, 4f, true); // force=true
+}
 
     public void HukidasiGYU()
     {
         DisplaySpecialBubble(GYU);
     }
 
-    public void HukidasiStageClear()
-    {
-        DisplaySpecialBubble(StageClear,true, 4f);
-    }
+
+public void HukidasiStageClear()
+{
+    DisplaySpecialBubble(StageClear, true, 4f, true); // force=true
+}
 
     public void HukidasiSpeedUP()
     {
