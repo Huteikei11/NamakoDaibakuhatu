@@ -17,6 +17,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private MayumiManager mayumiManager;
     [SerializeField] private SyaseiGageBeat syaseiGageBeat;
     [SerializeField] private SpeechBubbleManager_SpriteRenderer speechBubble;
+    [SerializeField] private FinishSE finishSE;
+    [SerializeField] private PaiSE paiSE;
     public Animator keikianim;
     [SerializeField] private int[] shotnums;
     public GameObject karioki;
@@ -163,6 +165,9 @@ public class DialogueController : MonoBehaviour
         // まゆみちゃん射精表情
         mayumiManager.mode = 1;
 
+        paiSE.StopPlaying(); // 効果音を止める
+        finishSE.StartClearSE(); // 成功時の効果音を再生
+
         for (int i = 0; i < spawnCount; i++)
         {
             GameObject instance = Instantiate(prefab, transform.position, Quaternion.identity);
@@ -190,6 +195,7 @@ public class DialogueController : MonoBehaviour
         }
         // まゆみちゃん余韻表情
         mayumiManager.mode = 2;
+        finishSE.StopClearSE(); // 成功時の効果音を止める
         keikianim.SetTrigger("AnyKey");//射精モーション止める
 
         yield return new WaitForSeconds(3f);
@@ -206,7 +212,10 @@ public class DialogueController : MonoBehaviour
         mayumiManager.mode = 1;
 
         speechBubble.HukidasiFailed(); // 失敗の吹き出しを表示
-        speechBubble.StopDisplay(); // 失敗の吹き出しを止める
+        speechBubble.StopDisplay(); // 吹き出しの表示を止める
+
+        paiSE.StopPlaying(); // 効果音を止める
+        finishSE.StartFailedSE();// 失敗時の効果音を再生
 
         //発射する方　精液のアニメーションを出す
         int spawnCount = Random.Range(1, 5);//ランダムな回数射精
@@ -236,6 +245,7 @@ public class DialogueController : MonoBehaviour
         }
         // まゆみちゃん余韻表情
         mayumiManager.mode = 2;
+        finishSE.StopFailedSE(); // 失敗時の効果音を止める
 
         yield return new WaitForSeconds(3f);
         TransitionManager.Instance.TransitionToScene("Result");

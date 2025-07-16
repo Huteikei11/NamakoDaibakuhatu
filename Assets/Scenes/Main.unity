@@ -5831,6 +5831,7 @@ MonoBehaviour:
   gametime: 30
   countdownTimer: {fileID: 33570461}
   scoreManager: {fileID: 1603796674}
+  paiSE: {fileID: 1566271507}
 --- !u!114 &1839694823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5853,6 +5854,8 @@ MonoBehaviour:
   mayumiManager: {fileID: 589255087}
   syaseiGageBeat: {fileID: 1675629577}
   speechBubble: {fileID: 285350253}
+  finishSE: {fileID: 2089190853}
+  paiSE: {fileID: 1566271507}
   keikianim: {fileID: 1893494323}
   shotnums: 0300000006000000080000000a000000
   karioki: {fileID: 587439874}
@@ -6710,6 +6713,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f087808a280dc546972988fa2e0f4fe, type: 3}
   - {fileID: 8300000, guid: 18dada11cbdba434c8f30befa2395189, type: 3}
   audioSource: {fileID: 2089190852}
+  clearSEInterval: 1
+  failedSEInterval: 1
 --- !u!4 &2089190854
 Transform:
   m_ObjectHideFlags: 0
