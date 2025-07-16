@@ -626,6 +626,12 @@
 				"resultPhraseNo" : "気持ちいいっていうのは結構だけど、もう少し我慢できないの？",
 				"score" : 4908,
 				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 1,
+				"resultPhraseNo" : "これじゃ全然だわー。もう少し堪えられないの？",
+				"score" : 3860,
+				"isCleared" : false
 			}
 		]
 	},

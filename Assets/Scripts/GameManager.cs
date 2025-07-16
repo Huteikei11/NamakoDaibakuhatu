@@ -146,6 +146,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
+
+        paiSE.SetPlaying(!IsPaused); // Œø‰Ê‰¹‚Ìƒ|[ƒYØ‚è‘Ö‚¦
+
         if (IsPaused)
         {
             countdownTimer.StopTimer();
