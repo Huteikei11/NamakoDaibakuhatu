@@ -50,7 +50,7 @@ public class SyaseiGageBeat : MonoBehaviour
             }
             float pitch = Mathf.Clamp(0.5f + (persent - 0.8f) * 6.5f, 0.5f, 1.5f);
             audioSource.pitch = pitch;
-            audioSource.volume = Mathf.Clamp(0.1f + (persent - 0.8f) * 3f, 0.1f, 0.7f);
+            audioSource.volume = Mathf.Clamp(0.1f + (persent - 0.8f) * 5f, 0.1f, 1f);
         }
         else
         {

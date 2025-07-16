@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int gametime;
     [SerializeField] private CountdownTimer countdownTimer;
     [SerializeField] private ScoreManager scoreManager; // スコアマネージャーの参照]
+    [SerializeField] private PaiSE paiSE; // 効果音の参照
 
     private bool isWaitingStart = true; // 3秒待機中かどうか
 
@@ -104,7 +105,9 @@ public class GameManager : MonoBehaviour
         {
                 animator.enabled = !IsPaused;
         }
-        
+
+        paiSE.SetPlaying(!IsPaused); // 効果音のポーズ切り替え
+
         if (IsPaused)
         {
             countdownTimer.StopTimer();

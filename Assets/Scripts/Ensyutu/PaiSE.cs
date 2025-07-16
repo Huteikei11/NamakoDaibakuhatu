@@ -18,11 +18,12 @@ public class PaiSE : MonoBehaviour
 
     void Start()
     {
+
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
-        StartPlaying();
+        audioSource.volume = 0.25f; // デフォルトの音量設定
     }
 
     public void StartPlaying()
@@ -63,4 +64,16 @@ public class PaiSE : MonoBehaviour
         }
         playCoroutine = null;
     }
+
+    public void SetPlaying(bool playing)
+    {
+        if (playing)
+        {
+            StartPlaying();
+        }
+        else
+        {
+            StopPlaying();
+        }
+    }   
 }
