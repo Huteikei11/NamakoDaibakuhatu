@@ -28,6 +28,11 @@ public class TitleLogo : MonoBehaviour
         // 初期位置にセット
         transform.position = originalPosition;
 
+
+    }
+
+    public void StartOP()
+    {
         // 指定した座標へ移動
         transform.DOMove(targetPosition, moveDuration)
             .SetEase(moveEase)

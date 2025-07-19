@@ -27,13 +27,15 @@ public class TitleKuroobi : MonoBehaviour
 
         // 初期位置にセット
         transform.position = originalPosition;
+    }
 
+    public void StartOP()
+    {
         // 指定した座標へ移動
         transform.DOMove(targetPosition, moveDuration)
             .SetEase(moveEase)
             .SetDelay(moveDelay);
     }
-
     public void Shift()
     {
         Vector3 shiftedPosition = transform.position + new Vector3(shiftAmount, 0f, 0f);

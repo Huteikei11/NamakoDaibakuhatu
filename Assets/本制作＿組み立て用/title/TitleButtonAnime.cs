@@ -21,6 +21,8 @@ public class TitleButtonAnime : MonoBehaviour
 
     public bool isfitst;
     public bool top;
+
+    private float adjust;
    
     void Start()
     {
@@ -31,7 +33,7 @@ public class TitleButtonAnime : MonoBehaviour
         // 初期位置にセット
         transform.position = originalPosition;
         // 指定時間待ってから移動（delay = 1秒）
-        float adjust = 0f;
+        adjust = 0f;
         if (top)
         {
             adjust = 0.5f;
@@ -39,11 +41,16 @@ public class TitleButtonAnime : MonoBehaviour
         if (isfitst)
         {
 
-            MoveToTarget(moveDelay,adjust);
+            // MoveToTarget(moveDelay,adjust);
         }
-        adjust = 0f;
+        // adjust = 0f;
     }
 
+
+    public void FirstMovetoTarget()
+    {
+        MoveToTarget(moveDelay, adjust);
+    }
     // 指定した座標（targetPosition）へ delay秒待ってから移動
     public void MoveToTarget(float delay, float adjust =0f)
     {

@@ -40,13 +40,17 @@ public class TitleMenuController : MonoBehaviour
         lastMovedItem = mainMenuItems[0];
         isAllowMove = true;
 
+
+    }
+
+    public void StartOP()
+    {
         // ゲーム開始時にアニメーション中であることを設定
         isAnimating = true;
 
         // 必要に応じて初期アニメーションを実行
         PlayInitialAnimation();
     }
-
     void PlayInitialAnimation()
     {
         // 初期アニメーション終了後に isAnimating を false にリセット
