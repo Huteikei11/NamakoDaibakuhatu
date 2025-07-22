@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class TitleMenuController : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class TitleMenuController : MonoBehaviour
     private bool isAllowMove;
     public bool isAnimating = false; // アニメーション中かどうかを判定するフラグ
 
+    public GameObject instructionSprite; // 操作説明用スプライト（Inspectorから取得）
+    private bool isWaitingForInstructionInput = false;
+    private Action instructionAfterAction; // 操作説明後に実行する処理
+
     void Start()
     {
         currentMenu = mainMenuItems;
@@ -63,6 +68,19 @@ public class TitleMenuController : MonoBehaviour
     {
         // アニメーション中は操作を無効化
         if (isAnimating) return;
+
+        // 操作説明表示中は入力待ち
+        if (isWaitingForInstructionInput)
+        {
+            if (Input.GetMouseButtonDown(0) || Input.anyKeyDown)
+            {
+                instructionSprite.SetActive(false);
+                isWaitingForInstructionInput = false;
+                instructionAfterAction?.Invoke();
+                instructionAfterAction = null;
+            }
+            return;
+        }
 
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isAllowMove)
         {
@@ -230,6 +248,33 @@ public class TitleMenuController : MonoBehaviour
 
                 difficulty = selectedIndex; //難易度。読み込むときはTitleMenuController.difficulty
                 //A=0,B=1,C=2
+
+                // difficulty == 0の時は操作説明を挟む
+                if (difficulty == 0 && instructionSprite != null)
+                {
+                    instructionSprite.SetActive(true);
+                    isWaitingForInstructionInput = true;
+                    instructionAfterAction = () =>
+                    {
+                        Debug.Log("試験 " + (difficulty.ToString()) + " 開始");
+                        for (int i = 0; i <= 3; i++)
+                        {
+                            float delay = (i == difficulty) ? 0.1f : 0.3f;
+                            ToOriginaltestMenuItemAt(i, delay);
+                            ToOriginalRunkAt(i, delay);
+                        }
+                        Animator cursorAnimator = cursor.GetComponent<Animator>();
+                        if (cursorAnimator != null)
+                        {
+                            cursorAnimator.SetTrigger("End");
+                        }
+                        float offScreenX = originalX - 10f;
+                        cursor.transform.DOMoveX(offScreenX, 0f);
+                        StartCoroutine(ChangeScene(difficulty));
+                    };
+                    return;
+                }
+
                 Debug.Log("試験 " + (difficulty.ToString()) + " 開始");
                 for (int i = 0; i <= 3; i++)
                 {
