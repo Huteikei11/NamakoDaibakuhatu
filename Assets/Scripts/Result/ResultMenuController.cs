@@ -8,6 +8,7 @@ public class ResultMenuController : MonoBehaviour
     public GameObject[] dynamicMenuItems;
     public GameObject cursor;
     public GameObject dynamicMenuContainer;
+    public EndingController endingController; // EndingController参照
 
     private int selectedIndex = 0;
     private List<GameObject> currentMenu = new List<GameObject>();
@@ -23,6 +24,7 @@ public class ResultMenuController : MonoBehaviour
     private bool isAnimating = false; // アニメーション中かどうかを判定するフラグ
     public float cursorX;
 
+    public bool debugEnding;
     void Awake()
     {
         difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
@@ -120,7 +122,7 @@ public class ResultMenuController : MonoBehaviour
             BGMManager.Instance.DestroyBGMManager();
         }
 
-        if (selectedIndex == 0)
+        if (selectedIndex == 0) // 次のステージへ進むorもう一回
         {
             if (dynamicOptionState) // クリアしていた時と最終ステージではない時
             {
@@ -132,9 +134,23 @@ public class ResultMenuController : MonoBehaviour
                 DifficultyManager.Instance.StartGame("Main", difficulty);
             }
         }
-        else if (selectedIndex == 1)
+        else if (selectedIndex == 1) //タイトルに戻る
         {
-            TransitionManager.Instance.TransitionToScene("Title");
+            if(difficulty == 2 || debugEnding) // 最終ステージをクリアした場合
+            {
+                Debug.Log("EndingControllerの演出を開始");
+                // EndingControllerの演出を開始し、完了後にタイトル遷移
+                if (endingController != null)
+                {
+                    endingController.StartEndingWithCallback(() => {
+                        TransitionManager.Instance.TransitionToScene("Title");
+                    });
+                }
+            }
+            else // それ以外はタイトルへ
+            {
+                TransitionManager.Instance.TransitionToScene("Title");
+            }
         }
     }
 
