@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEditor.ShaderKeywordFilter;
-
 public class EndingController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
