@@ -19,20 +19,19 @@ public class EndingController : MonoBehaviour
     {
         Debug.Log("エンディング開始");
         sequence = DOTween.Sequence();
-        sequence.Append(MoveSprite(spriteRenderer, new Vector3(-1f, 0, 0), 1f));
+        sequence.Append(FadeSprite(spriteRenderer3, 1f, 0.5f));
         sequence.Append(Wait(0.6f));
+        sequence.Append(MoveSprite(spriteRenderer, new Vector3(2f, 0, 0), 1f));
+        sequence.Append(Wait(1.5f));
+
         sequence.Append(FadeSprite(spriteRenderer, 0.5f, 0.5f));
-        sequence.Append(MoveSprite(spriteRenderer2, new Vector3(2f, 0f, 0), 1f));
+        sequence.Append(MoveSprite(spriteRenderer2, new Vector3(-2f, 0f, 0), 1f));
         sequence.Append(Wait(0.6f));
-        sequence.Append(FadeSprite(spriteRenderer2, 0.5f, 0.5f));
-        sequence.Append(Wait(0.6f));
-        sequence.Append(MoveSprite(spriteRenderer3, new Vector3(0f, -3f, 0), 1f));
-        sequence.Append(Wait(0.4f));
+
         sequence.Append(Wait(2f));
         sequence.Append(FadeSprite(spriteRenderer, 0f, 1f));
         sequence.Join(FadeSprite(spriteRenderer2, 0f, 1f));
-        sequence.Join(FadeSprite(spriteRenderer3, 0f, 1f));
-        sequence.Append(Wait(0.5f));
+        sequence.Append(Wait(1f));
         if (onComplete != null) sequence.OnComplete(() => onComplete());
     }
 

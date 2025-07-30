@@ -728,6 +728,30 @@
 				"resultPhraseNo" : "量と濃さだけじゃなくて我慢も頑張りなさい",
 				"score" : 3990,
 				"isCleared" : false
+			},{
+				"difficulty" : 0,
+				"rank" : 4,
+				"resultPhraseNo" : "目標値はともかく、頑張ったわね！",
+				"score" : 10682,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 4,
+				"resultPhraseNo" : "及第点と言ったところね、今後が楽しみー",
+				"score" : 10886,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 4,
+				"resultPhraseNo" : "目標値はともかく、頑張ったわね！",
+				"score" : 11616,
+				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 4,
+				"resultPhraseNo" : "及第点と言ったところね、今後が楽しみー",
+				"score" : 9870,
+				"isCleared" : true
 			}
 		]
 	},
