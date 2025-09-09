@@ -2331,7 +2331,7 @@ MonoBehaviour:
   cursorMoveDuration: 0
   cursorOffsetX: -0.5
   cursorX: 3.94
-  debugEnding: 0
+  debugEnding: 1
 --- !u!114 &1819642878
 MonoBehaviour:
   m_ObjectHideFlags: 0

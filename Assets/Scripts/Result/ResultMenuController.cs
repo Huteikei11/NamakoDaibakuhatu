@@ -25,6 +25,8 @@ public class ResultMenuController : MonoBehaviour
     public float cursorX;
 
     public bool debugEnding;
+
+    private bool EndingFlag = true; // エンディングが連続で呼ばれないようにするフラグ
     void Awake()
     {
         difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
@@ -114,7 +116,9 @@ public class ResultMenuController : MonoBehaviour
 
     void SelectOption()
     {
-        if (currentMenu.Count == 0) return;
+        if (currentMenu.Count == 0 || !EndingFlag) return;
+
+        EndingFlag = false;//連続で呼ばれないように
 
         // シーン遷移後にBGMManagerを削除
         if (BGMManager.Instance != null)
@@ -136,7 +140,9 @@ public class ResultMenuController : MonoBehaviour
         }
         else if (selectedIndex == 1) //タイトルに戻る
         {
-            if(difficulty == 2 || debugEnding) // 最終ステージをクリアした場合
+
+
+            if (difficulty == 2 || debugEnding) // 最終ステージをクリアした場合
             {
                 Debug.Log("EndingControllerの演出を開始");
                 // EndingControllerの演出を開始し、完了後にタイトル遷移

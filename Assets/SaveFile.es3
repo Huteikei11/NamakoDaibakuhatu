@@ -752,6 +752,12 @@
 				"resultPhraseNo" : "及第点と言ったところね、今後が楽しみー",
 				"score" : 9870,
 				"isCleared" : true
+			},{
+				"difficulty" : 0,
+				"rank" : 3,
+				"resultPhraseNo" : "まぁ、いい感じ？満足は出来ない結果だけど",
+				"score" : 7616,
+				"isCleared" : true
 			}
 		]
 	},
